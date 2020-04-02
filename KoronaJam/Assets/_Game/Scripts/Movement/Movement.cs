@@ -17,6 +17,9 @@ namespace Movement
 		[Title("Local refs")] 
 		[SerializeField] private CharacterController _CharacterController;
 
+		[Title("Settings")] 
+		[SerializeField] private float _SpeedModifier = 1;
+
 		private bool _movementEnabled = true;
 		
 		private void Update()
@@ -32,7 +35,14 @@ namespace Movement
 			var horizontal = Input.GetAxis("Horizontal");
 			var vertical   = Input.GetAxis("Vertical");
 
-			_CharacterController.Move(new Vector3(horizontal, 0, vertical));
+			var movementOffset = new Vector3(horizontal, 0, vertical);
+			
+			var normalizedMovementOffset = movementOffset.magnitude > 1 ? movementOffset.normalized : movementOffset;
+			
+			normalizedMovementOffset -= Vector3.up * 9.81f;
+			normalizedMovementOffset *= _SpeedModifier * Time.deltaTime;
+			
+			_CharacterController.Move(normalizedMovementOffset);
 		}
 
 		private void ProcessRotation()
@@ -46,8 +56,6 @@ namespace Movement
 			var angle = 90 - Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 			
 			transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
-
-
 		}
 
 	}
