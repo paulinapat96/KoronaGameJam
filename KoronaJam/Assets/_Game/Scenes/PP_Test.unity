@@ -564,6 +564,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickup
       objectReference: {fileID: 0}
+    - target: {fileID: 2989898856504852892, guid: 3a5bd7e0821414f438b6cf8f066ab999,
+        type: 3}
+      propertyPath: _Collider
+      value: 
+      objectReference: {fileID: 1834537206}
     - target: {fileID: 5638422968101671014, guid: 3a5bd7e0821414f438b6cf8f066ab999,
         type: 3}
       propertyPath: m_Size.y
@@ -582,6 +587,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 811514852829117659, guid: 3a5bd7e0821414f438b6cf8f066ab999, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3a5bd7e0821414f438b6cf8f066ab999, type: 3}
+--- !u!65 &1834537206 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5638422968101671014, guid: 3a5bd7e0821414f438b6cf8f066ab999,
+    type: 3}
+  m_PrefabInstance: {fileID: 1565886516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1837732198 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8534479609270141114, guid: 0ec14ea4d7a75594c8a46d329bce3790,

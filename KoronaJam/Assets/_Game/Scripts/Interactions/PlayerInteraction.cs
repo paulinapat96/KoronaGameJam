@@ -19,7 +19,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Pickup" || other.tag == "CraftinItem")
+        if (other.tag == "Pickup" || other.tag == "CraftingItem")
         {
             currenObjectInCollision = other.gameObject;
             ShowText(true);
@@ -28,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Pickup" || other.tag == "CraftinItem")
+        if (other.tag == "Pickup" || other.tag == "CraftingItem")
         {
             pressETextObject.SetActive(false);
             currenObjectInCollision = null;
@@ -50,29 +50,46 @@ public class PlayerInteraction : MonoBehaviour
                 if (currenObjectInCollision.tag == "CraftingItem" && isButtonPressedDown)
                 {
 
-                    //StopHoldingCraftingitem();
+                    currenObjectInCollision.GetComponent<CraftingItem>().BuildingFinished();
+                    Debug.Log("stop budowy");
 
                 }
             }
             else
             {
-                DropItem();
                 if(currenObjectInCollision.tag == "CraftingItem")
                 {
-                    //PutingItemToCraftinitem()
+                    if(currenObjectInCollision.GetComponent<CraftingItem>().PutItem(holdigPickup))
+                    {
+                        Debug.Log("udało się wsadzić item");
+                        holdigPickup.gameObject.transform.SetParent(currenObjectInCollision.transform);
+                        holdigPickup.gameObject.SetActive(false);
+                        holdigPickup = null;
+                        return;
+
+                    }
+                    else
+                    {
+                        Debug.Log("nie mozesz wsadzić itemu");
+                    }
+                  
                 }
+
+               if(holdigPickup) DropItem();
             }
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (currenObjectInCollision.tag == "CraftingItem" && !holdigPickup)
-            {
-                //if(currenObjectInCollision.GetComponent<CraftingItem>().AreRequirementsFullfilled())
-                //{
-                //    //StartHoldingCraftingitem();
-               // isButtonPressedDown = true;
-                //}
+            if (currenObjectInCollision && currenObjectInCollision.tag == "CraftingItem" && !holdigPickup)
+            {  
+                CraftingItem item = currenObjectInCollision.GetComponent<CraftingItem>();
+                if (item.AreRequirementsFullfilled())
+                {
+                    item.BuildingStarted();
+                    isButtonPressedDown = true;
+                    Debug.Log("start budowy");
+                }
 
             }
 

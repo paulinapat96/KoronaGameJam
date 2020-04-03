@@ -88,6 +88,7 @@ public class CraftingItem : MonoBehaviour
     
     public void SetActionProgress(float time)
     {
+        // TODO: Nie obsłużyłeś on trigger exit ;) Zostaje pasek ładowania 
         if (_CraftingTime <= 0) return;
         
         var progres = time / _CraftingTime;
