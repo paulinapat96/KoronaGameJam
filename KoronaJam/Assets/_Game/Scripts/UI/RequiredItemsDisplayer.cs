@@ -16,6 +16,7 @@ public class RequiredItemsDisplayer : MonoBehaviour
         pickups.ForEach(arg =>
         {
             var ob = Instantiate(_RequiredItemsPrefab, Vector3.zero, Quaternion.identity, _ItemsContainer);
+            ob.transform.localPosition = Vector3.zero;
             ob.SetSprite(arg.IconDisabled, false);
         });
     }
@@ -27,5 +28,14 @@ public class RequiredItemsDisplayer : MonoBehaviour
             Destroy(_ItemsContainer.GetChild(i));
         }
     }
-    
+
+    public void Show()
+    {
+        _ItemsContainer.gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        _ItemsContainer.gameObject.SetActive(false);
+    }
 }

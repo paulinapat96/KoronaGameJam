@@ -4,19 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using UnityEditor.U2D;
 using UnityEngine;
 
 public class CraftingItem : MonoBehaviour
 {
+    [Title("Name")]
+    [SerializeField] private string Name;
 
-    [Title("Local refs")] 
+    [Title("Local refs")] [Required]
     [SerializeField] private RequiredItemsDisplayer _ItemsDisplayer;
+    [SerializeField] private ProgressSetter _ProgressSetter;
     
-    [Title("Scene list")]
+    [Title("Scene list - required")] [Required]
     [SerializeField] private List<Pickup> _RequiredItems;
 
-    [Title("Triggering")] 
+    [Title("Triggering - required")] [Required] 
     [SerializeField] private AbstractJobResult _AbstractJobResult;
 
     [Title("Settings")] 
@@ -36,7 +38,7 @@ public class CraftingItem : MonoBehaviour
         if ( !_RequiredItems.IsNullOrEmpty() ) _ItemsDisplayer.SetData(_RequiredItems);
     }
 
-    public bool RequirementsComplete()
+    public bool AreRequirementsFullfilled()
     {
         return _ownedItems.All(arg => arg == true);
     }
@@ -68,7 +70,29 @@ public class CraftingItem : MonoBehaviour
         }
         
         return false;
+    }
+
+    public void BuildingStarted()
+    {
+        _ItemsDisplayer.Hide();
+        _ProgressSetter.ShowSlider();
+    }
+
+    public void BuildingFinished()
+    {
+        _ItemsDisplayer.Hide();
+        _ProgressSetter.HideSlider();// Show anim
         
+        TriggerAction();
+    }
+    
+    public void SetActionProgress(float time)
+    {
+        if (_CraftingTime <= 0) return;
+        
+        var progres = time / _CraftingTime;
+        
+        _ProgressSetter.SetValue(progres);
     }
 
     [Button]
@@ -76,5 +100,30 @@ public class CraftingItem : MonoBehaviour
     {
         _AbstractJobResult.ShowChange();
     }
-    
+
+    [Button]
+    public void TriggerBuildingAction()
+    {
+        BuildingStarted();
+        
+        StartCoroutine(Editor_BuildAction(BuildingFinished));
+    }
+
+    private IEnumerator Editor_BuildAction(Action action)
+    {
+        float animTime = _CraftingTime;
+        float currTime = 0;
+
+        while (currTime < animTime)
+        {
+            SetActionProgress(currTime);
+
+            currTime += Time.deltaTime;
+
+            yield return null;
+        }
+        
+        action?.Invoke();
+
+    }
 }

@@ -21,7 +21,8 @@ namespace Movement
 		[SerializeField] private float _SpeedModifier = 1;
 
 		private bool _movementEnabled = true;
-		
+
+
 		private void Update()
 		{
 			if (!_movementEnabled) return;
