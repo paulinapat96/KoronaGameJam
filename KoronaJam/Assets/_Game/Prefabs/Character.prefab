@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Camera: {fileID: 0}
   _CharacterController: {fileID: 1876061869445901236}
-  _SpeedModifier: 8
+  _SpeedModifier: 6.5
 --- !u!143 &1876061869445901236
 CharacterController:
   m_ObjectHideFlags: 0
