@@ -320,6 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3313695755342684046}
   - component: {fileID: 3313695755342684047}
+  - component: {fileID: 496083469}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -334,13 +335,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3313695755342684040}
-  m_LocalRotation: {x: 0.41335076, y: -0.18875605, z: 0.08801824, w: 0.88643396}
+  m_LocalRotation: {x: 0.18764094, y: 0.006170744, z: -0.0971826, w: 0.97739875}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2436006871114445469}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50.000004, y: -24.042002, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.592001, y: -1.5040001, z: -11.643001}
 --- !u!108 &3313695755342684047
 Light:
   m_ObjectHideFlags: 0
@@ -352,8 +353,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.39999998, g: 0.5269264, b: 1, a: 1}
+  m_Intensity: 2.69
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -402,3 +403,22 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!95 &496083469
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313695755342684040}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7eb9e3d0965bd014ea3ad84fe0f98f72, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
