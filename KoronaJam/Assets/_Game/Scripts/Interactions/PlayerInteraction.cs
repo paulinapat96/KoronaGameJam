@@ -4,88 +4,97 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    GameObject holdingItem = null;
+    Pickup holdigPickup = null;
     GameObject holdingCraftinItem = null;
     [SerializeField] GameObject pressETextObject;
     private bool isButtonPressedDown = false;
     private float holdTimer = 0f;
+    private GameObject currenObjectInCollision = null; // TODO: zamiana na listę obiektów i obsłużenie wiele kolizji jednoczesnie
+
+    
     private void Start()
     {
-        pressETextObject.SetActive(false);
+        ShowText(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Pickup")
+        if (other.tag == "Pickup" || other.tag == "CraftinItem")
         {
-            pressETextObject.SetActive(true);
+            currenObjectInCollision = other.gameObject;
+            ShowText(true);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Pickup") // TODO: dopisać tutaj i do enter potem bluprint
+        if (other.tag == "Pickup" || other.tag == "CraftinItem")
         {
             pressETextObject.SetActive(false);
-            Debug.Log("wyjscie - co tu sie odpierdala?");
+            currenObjectInCollision = null;
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        //co jak są dwa obiekty w zasiegu?
-        if (Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.E) && currenObjectInCollision)
         {
-            if (!holdingItem)
+            if (!holdigPickup)
             {
-                if (other.tag == "Pickup")
+                if (currenObjectInCollision.tag == "Pickup")
                 {
-                    holdingItem = other.gameObject;
+                    holdigPickup = currenObjectInCollision.GetComponent<Pickup>();
                     PickItem();
                 }
-                
-                if(isButtonPressedDown)
+
+                if (currenObjectInCollision.tag == "CraftingItem" && isButtonPressedDown)
                 {
-                    isButtonPressedDown = false;
-                    holdTimer = Time.time - holdTimer;
-                    HoldingCraftingItem(holdingCraftinItem, holdTimer);
-                    holdingCraftinItem = null;
+
+                    //StopHoldingCraftingitem();
+
                 }
             }
-            else 
+            else
             {
                 DropItem();
+                if(currenObjectInCollision.tag == "CraftingItem")
+                {
+                    //PutingItemToCraftinitem()
+                }
             }
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (other.tag == "CraftingItem" && !holdingItem)
+            if (currenObjectInCollision.tag == "CraftingItem" && !holdigPickup)
             {
-                //do somtething on hold E
-                isButtonPressedDown = true;
-                holdingCraftinItem = other.gameObject;
-                holdTimer = Time.time;
+                //if(currenObjectInCollision.GetComponent<CraftingItem>().AreRequirementsFullfilled())
+                //{
+                //    //StartHoldingCraftingitem();
+               // isButtonPressedDown = true;
+                //}
+
             }
 
         }
     }
 
+
     private void PickItem()
     {
         // DOTO: Play animator - podniesienie rąk
-        holdingItem.transform.SetParent(transform);
-        holdingItem.transform.localPosition = new Vector3(0, 0, 0.5f);
-        pressETextObject.SetActive(false);
+        holdigPickup.transform.SetParent(transform);
+        holdigPickup.transform.localPosition = new Vector3(0, 0, 1f);
+        ShowText(false);
+
     }
 
     private void DropItem()
     {
         // TODO: Play animator - opuszczenie rąk
-        //akcje do puszcenia...
-        holdingItem.transform.SetParent(null);
-        // holdingItem.transform.SetParent(holdingItem.GetComponent<Pickup>().containerTransform.transform); // TODO: przeparentować potem na jakiś kontener
-        holdingItem = null;
+        OnTriggerEnter(holdigPickup.Collider);
+        holdigPickup.transform.SetParent(null);
+        holdigPickup = null;
     }
 
     private void HoldingCraftingItem(GameObject item, float time)
@@ -96,6 +105,11 @@ public class PlayerInteraction : MonoBehaviour
     public void OnChangeActiveItem()
     {
         // TODO: wyświetlenie aktywnego itemu
-     ///   holdingItem.GetComponent<Pickup>().iconDisabled;
+        ///   holdingItem.GetComponent<Pickup>().iconDisabled;
+    }
+
+    public void ShowText(bool displayText)
+    {
+        pressETextObject.SetActive(displayText);
     }
 }
