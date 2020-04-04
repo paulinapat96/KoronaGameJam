@@ -114,6 +114,14 @@ public class CraftingItem : MonoBehaviour
 
         return -1;
     }
+
+    public bool CanPutItem(Pickup item)
+    {
+        if (_RequiredItemsToTrigger == null) return false;
+
+        return _RequiredItemsToTrigger.Contains(item);
+
+    }
     
     public bool PutItem(Pickup item)
     {
