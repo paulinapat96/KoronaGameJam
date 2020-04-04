@@ -22,17 +22,27 @@ namespace Movement
 
 		private bool _movementEnabled = true;
 
+		public void DisableMovement()
+		{
+			_movementEnabled = false;
+		}
+
+		public void EnableMovement()
+		{
+			_movementEnabled = true;
+		}
+		
 
 		private void Update()
 		{
-			if (!_movementEnabled) return;
-
 			ProcessMovement();
 			ProcessRotation();
 		}
 
 		private void ProcessMovement()
 		{
+			if (!_movementEnabled) return;
+
 			var horizontal = Input.GetAxis("Horizontal");
 			var vertical   = Input.GetAxis("Vertical");
 
