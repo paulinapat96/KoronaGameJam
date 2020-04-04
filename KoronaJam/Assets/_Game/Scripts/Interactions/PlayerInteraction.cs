@@ -28,6 +28,7 @@ public class PlayerInteraction : MonoBehaviour
             objectsInCollision.Add(other.gameObject);
             currenObjectInCollision = getNearestCollidesObject();
             ShowText(true);
+            other.GetComponent<Pickup>().ChangeHighlight(true);
         }
         else if (other.CompareTag("CraftingItem"))
         {
@@ -35,7 +36,7 @@ public class PlayerInteraction : MonoBehaviour
             var craftingItem = other.GetComponent<CraftingItem>();
             currenObjectInCollision = other.gameObject;
             
-            if (craftingItem.IsUnlocked)
+            if (craftingItem.IsUnlocked && craftingItem.AreRequirementsFullfilled())
             {
                 ShowText(true);
             }
@@ -44,13 +45,15 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Pickup" || other.tag == "CraftingItem")
+        if (other.CompareTag("Pickup") || other.CompareTag("CraftingItem"))
         {
             pressETextObject.SetActive(false);
             objectsInCollision.Remove(other.gameObject);
             currenObjectInCollision = getNearestCollidesObject();
+            if(other.CompareTag("Pickup")) other.GetComponent<Pickup>().ChangeHighlight(false);
         }
     }
+
 
     private void Update()
     {
