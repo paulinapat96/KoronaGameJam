@@ -660,6 +660,10 @@ MonoBehaviour:
   _Camera: {fileID: 0}
   _CharacterController: {fileID: 1876061869445901236}
   _SpeedModifier: 8
+  _NonHoldingItem_Center: 0
+  _NonHoldingItem_Radius: 0.7
+  _HoldingItem_Center: 0.6
+  _HoldingItem_Radius: 1
 --- !u!136 &257198689056368490
 CapsuleCollider:
   m_ObjectHideFlags: 0
