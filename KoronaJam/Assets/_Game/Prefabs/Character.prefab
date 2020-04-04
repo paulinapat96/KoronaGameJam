@@ -705,3 +705,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressETextObject: {fileID: 1410017040}
+  playerCanvas: {fileID: 97794762}

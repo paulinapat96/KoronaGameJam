@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.Utilities;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,18 +11,22 @@ public class PlayerInteraction : MonoBehaviour
     private bool isButtonPressedDown = false;
     private float holdTimer = 0f;
     private GameObject currenObjectInCollision = null; // TODO: zamiana na listę obiektów i obsłużenie wiele kolizji jednoczesnie
+    [SerializeField] private GameObject playerCanvas;
+    List<GameObject> objectsInCollision;
+    bool isCanvasActive = false;
 
-    
     private void Start()
     {
-        ShowText(false);
+        objectsInCollision = new List<GameObject>();
+        ShowText(isCanvasActive);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Pickup" || other.tag == "CraftingItem")
-        {
-            currenObjectInCollision = other.gameObject;
+        {   
+            objectsInCollision.Add(other.gameObject);
+            currenObjectInCollision = getNearestCollidesObject();
             ShowText(true);
         }
     }
@@ -31,6 +36,7 @@ public class PlayerInteraction : MonoBehaviour
         if (other.tag == "Pickup" || other.tag == "CraftingItem")
         {
             pressETextObject.SetActive(false);
+            objectsInCollision.Remove(other.gameObject);
             currenObjectInCollision = null;
         }
     }
@@ -39,6 +45,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.E) && currenObjectInCollision)
         {
+            currenObjectInCollision = getNearestCollidesObject();
             if (!holdigPickup)
             {
                 if (currenObjectInCollision.tag == "Pickup")
@@ -71,8 +78,7 @@ public class PlayerInteraction : MonoBehaviour
                     else
                     {
                         Debug.Log("nie mozesz wsadzić itemu");
-                    }
-                  
+                    }    
                 }
 
                if(holdigPickup) DropItem();
@@ -94,16 +100,15 @@ public class PlayerInteraction : MonoBehaviour
             }
 
         }
+       if(isCanvasActive) playerCanvas.transform.rotation = Quaternion.Euler(0, -transform.rotation.y, 0);
     }
-
 
     private void PickItem()
     {
-        // DOTO: Play animator - podniesienie rąk
+        // TODO: Play animator - podniesienie rąk
         holdigPickup.transform.SetParent(transform);
         holdigPickup.transform.localPosition = new Vector3(0, 0, 1f);
         ShowText(false);
-
     }
 
     private void DropItem()
@@ -119,8 +124,29 @@ public class PlayerInteraction : MonoBehaviour
         Debug.Log(item.name + time);
     }
 
+    private GameObject getNearestCollidesObject()
+    {
+        if (objectsInCollision.IsNullOrEmpty()) return null;
+
+        GameObject objWithMinDistance = objectsInCollision[0];
+        if(objectsInCollision.Count > 1)
+        { 
+            float minDis = Vector3.Distance(transform.position, objectsInCollision[0].transform.position);
+            foreach (GameObject obj in objectsInCollision)
+            {
+                if(obj.CompareTag("CraftingItem"))
+                {
+                    if (obj.GetComponent<CraftingItem>().AreRequirementsFullfilled()) return obj;
+                }
+                if (Vector3.Distance(transform.position, obj.transform.position) < minDis) objWithMinDistance = obj;
+            }
+        }
+        return objWithMinDistance;
+    }
+
     public void OnChangeActiveItem()
     {
+        
         // TODO: wyświetlenie aktywnego itemu
         ///   holdingItem.GetComponent<Pickup>().iconDisabled;
     }
@@ -128,5 +154,6 @@ public class PlayerInteraction : MonoBehaviour
     public void ShowText(bool displayText)
     {
         pressETextObject.SetActive(displayText);
+        isCanvasActive = displayText;
     }
 }
