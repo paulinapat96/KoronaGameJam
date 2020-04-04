@@ -19,10 +19,20 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Pickup" || other.tag == "CraftingItem")
+        if (other.CompareTag("Pickup"))
         {
             currenObjectInCollision = other.gameObject;
             ShowText(true);
+        }
+        else if (other.CompareTag("CraftingItem"))
+        {
+            var craftingItem = other.GetComponent<CraftingItem>();
+            currenObjectInCollision = other.gameObject;
+            
+            if (craftingItem.IsUnlocked)
+            {
+                ShowText(true);
+            }
         }
     }
 
@@ -75,13 +85,13 @@ public class PlayerInteraction : MonoBehaviour
                   
                 }
 
-               if(holdigPickup) DropItem();
+                if(holdigPickup) DropItem();
             }
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (currenObjectInCollision && currenObjectInCollision.tag == "CraftingItem" && !holdigPickup)
+            if (currenObjectInCollision && currenObjectInCollision.CompareTag("CraftingItem") && !holdigPickup)
             {  
                 CraftingItem item = currenObjectInCollision.GetComponent<CraftingItem>();
                 if (item.AreRequirementsFullfilled())
