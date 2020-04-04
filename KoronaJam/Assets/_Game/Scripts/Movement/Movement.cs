@@ -19,6 +19,11 @@ namespace Movement
 
 		[Title("Settings")] 
 		[SerializeField] private float _SpeedModifier = 1;
+		[SerializeField] private float _NonHoldingItem_Center = 0;
+		[SerializeField] private float _NonHoldingItem_Radius = 0;
+		[SerializeField] private float _HoldingItem_Center = 0;
+		[SerializeField] private float _HoldingItem_Radius = 0;
+		
 
 		private bool _movementEnabled = true;
 
@@ -31,7 +36,24 @@ namespace Movement
 		{
 			_movementEnabled = true;
 		}
-		
+
+		public void PlayerHoldItem()
+		{
+			_CharacterController.center = new Vector3(0, 0, _HoldingItem_Center);
+			_CharacterController.radius = _HoldingItem_Radius;
+
+		}
+
+		public void PlayerReleasedItem()
+		{
+			_CharacterController.center = new Vector3(0, 0, _NonHoldingItem_Center);
+			_CharacterController.radius = _NonHoldingItem_Radius;
+		}
+
+		private void Awake()
+		{
+			PlayerReleasedItem();
+		}
 
 		private void Update()
 		{
