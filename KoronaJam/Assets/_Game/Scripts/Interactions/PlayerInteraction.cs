@@ -31,6 +31,7 @@ public class PlayerInteraction : MonoBehaviour
         }
         else if (other.CompareTag("CraftingItem"))
         {
+            objectsInCollision.Add(other.gameObject);
             var craftingItem = other.GetComponent<CraftingItem>();
             currenObjectInCollision = other.gameObject;
             
@@ -47,12 +48,15 @@ public class PlayerInteraction : MonoBehaviour
         {
             pressETextObject.SetActive(false);
             objectsInCollision.Remove(other.gameObject);
-            currenObjectInCollision = null;
+            currenObjectInCollision = getNearestCollidesObject();
         }
     }
 
     private void Update()
     {
+        Debug.Log("Holding item:" + holdigPickup);
+        Debug.Log("Current collision:" + currenObjectInCollision + " List: "+objectsInCollision.Count);
+        
         if (Input.GetKeyUp(KeyCode.E) && currenObjectInCollision)
         {
             currenObjectInCollision = getNearestCollidesObject();
@@ -66,7 +70,6 @@ public class PlayerInteraction : MonoBehaviour
 
                 if (currenObjectInCollision.tag == "CraftingItem" && isButtonPressedDown)
                 {
-
                     currenObjectInCollision.GetComponent<CraftingItem>().BuildingFinished();
                     Debug.Log("stop budowy");
 
@@ -116,6 +119,7 @@ public class PlayerInteraction : MonoBehaviour
     private void PickItem()
     {
         // TODO: Play animator - podniesienie rąk
+        Debug.Log("pick");
         holdigPickup.transform.SetParent(transform);
         holdigPickup.transform.localPosition = new Vector3(0, 0, 1f);
         ShowText(false);
@@ -124,6 +128,8 @@ public class PlayerInteraction : MonoBehaviour
     private void DropItem()
     {
         // TODO: Play animator - opuszczenie rąk
+        Debug.Log("drop");
+        OnTriggerExit(holdigPickup.Collider);
         OnTriggerEnter(holdigPickup.Collider);
         holdigPickup.transform.SetParent(null);
         holdigPickup = null;
