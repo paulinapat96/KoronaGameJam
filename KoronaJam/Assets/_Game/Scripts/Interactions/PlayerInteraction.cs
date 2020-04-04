@@ -11,13 +11,13 @@ public class PlayerInteraction : MonoBehaviour
     Pickup holdigPickup = null;
     GameObject holdingCraftinItem = null;
     private GameObject currenObjectInCollision = null;
-    List<GameObject> objectsInCollision;
+    List<GameObject> objectsInCollisionList;
     private bool isButtonPressedDown = false;
     private bool isCanvasActive = false;
 
     private void Start()
     {
-        objectsInCollision = new List<GameObject>();
+        objectsInCollisionList = new List<GameObject>();
         ShowText(isCanvasActive);
     }
 
@@ -25,14 +25,14 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (other.CompareTag("Pickup"))
         {   
-            objectsInCollision.Add(other.gameObject);
+            objectsInCollisionList.Add(other.gameObject);
             currenObjectInCollision = getNearestCollidesObject();
             ShowText(true);
             other.GetComponent<Pickup>().ChangeHighlight(true);
         }
         else if (other.CompareTag("CraftingItem"))
         {
-            objectsInCollision.Add(other.gameObject);
+            objectsInCollisionList.Add(other.gameObject);
             var craftingItem = other.GetComponent<CraftingItem>();
             currenObjectInCollision = other.gameObject;
             
@@ -48,7 +48,7 @@ public class PlayerInteraction : MonoBehaviour
         if (other.CompareTag("Pickup") || other.CompareTag("CraftingItem"))
         {
             pressETextObject.SetActive(false);
-            objectsInCollision.Remove(other.gameObject);
+            objectsInCollisionList.Remove(other.gameObject);
             currenObjectInCollision = getNearestCollidesObject();
             if(other.CompareTag("Pickup")) other.GetComponent<Pickup>().ChangeHighlight(false);
         }
@@ -57,9 +57,11 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("HoldingItem: " + holdigPickup + " HoldingCraftinItem: " + holdingCraftinItem);
+        Debug.Log("currObjInCol: " + currenObjectInCollision + " List: " + objectsInCollisionList.Count);
         if (Input.GetKeyUp(KeyCode.E) && currenObjectInCollision)
         {
-            currenObjectInCollision = getNearestCollidesObject();
+            //currenObjectInCollision = getNearestCollidesObject();
             if (!holdigPickup)
             {
                 if (currenObjectInCollision.tag == "Pickup")
@@ -72,7 +74,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     currenObjectInCollision.GetComponent<CraftingItem>().BuildingFinished();
                     movement.EnableMovement();
-                   // Debug.Log("stop budowy");
+                    Debug.Log("stop budowy");
 
                 }
             }
@@ -82,7 +84,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     if(currenObjectInCollision.GetComponent<CraftingItem>().PutItem(holdigPickup))
                     {
-                      //  Debug.Log("udało się wsadzić item");
+                        Debug.Log("udało się wsadzić item");
                         holdigPickup.gameObject.transform.SetParent(currenObjectInCollision.transform);
                         holdigPickup.gameObject.SetActive(false);
                         holdigPickup = null;
@@ -91,7 +93,7 @@ public class PlayerInteraction : MonoBehaviour
                     }
                     else
                     {
-                      //  Debug.Log("nie mozesz wsadzić itemu");
+                       Debug.Log("nie mozesz wsadzić itemu");
                     }    
                 }
 
@@ -109,7 +111,7 @@ public class PlayerInteraction : MonoBehaviour
                     item.BuildingStarted();
                     movement.DisableMovement();
                     isButtonPressedDown = true;
-                   // Debug.Log("start budowy");
+                    Debug.Log("start budowy");
                 }
 
             }
@@ -120,7 +122,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void PickItem()
     {
-        //Debug.Log("pick");
+        Debug.Log("pick");
         movement.PlayerHoldItem();
         holdigPickup.transform.SetParent(transform);
         holdigPickup.transform.localPosition = new Vector3(0, 0, 1f);
@@ -129,7 +131,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void DropItem()
     {
-        //Debug.Log("drop");
+        Debug.Log("drop");
         movement.PlayerReleasedItem();
         OnTriggerExit(holdigPickup.Collider);
         OnTriggerEnter(holdigPickup.Collider);
@@ -139,13 +141,13 @@ public class PlayerInteraction : MonoBehaviour
 
     private GameObject getNearestCollidesObject()
     {
-        if (objectsInCollision.IsNullOrEmpty()) return null;
+        if (objectsInCollisionList.IsNullOrEmpty()) return null;
 
-        GameObject objWithMinDistance = objectsInCollision[0];
-        if(objectsInCollision.Count > 1)
+        GameObject objWithMinDistance = objectsInCollisionList[0];
+        if(objectsInCollisionList.Count > 1)
         { 
-            float minDis = Vector3.Distance(transform.position, objectsInCollision[0].transform.position);
-            foreach (GameObject obj in objectsInCollision)
+            float minDis = Vector3.Distance(transform.position, objectsInCollisionList[0].transform.position);
+            foreach (GameObject obj in objectsInCollisionList)
             {
                 if(obj.CompareTag("CraftingItem"))
                 {
