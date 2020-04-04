@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    [SerializeField] private GameObject pressETextObject;
+    [SerializeField] private GameObject playerCanvas;
+    [SerializeField] private Movement.Movement movement;
     Pickup holdigPickup = null;
     GameObject holdingCraftinItem = null;
-    [SerializeField] GameObject pressETextObject;
-    private bool isButtonPressedDown = false;
-    private float holdTimer = 0f;
-    private GameObject currenObjectInCollision = null; // TODO: zamiana na listę obiektów i obsłużenie wiele kolizji jednoczesnie
-    [SerializeField] private GameObject playerCanvas;
+    private GameObject currenObjectInCollision = null;
     List<GameObject> objectsInCollision;
-    bool isCanvasActive = false;
+    private bool isButtonPressedDown = false;
+    private bool isCanvasActive = false;
 
     private void Start()
     {
@@ -54,9 +54,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Holding item:" + holdigPickup);
-        Debug.Log("Current collision:" + currenObjectInCollision + " List: "+objectsInCollision.Count);
-        
         if (Input.GetKeyUp(KeyCode.E) && currenObjectInCollision)
         {
             currenObjectInCollision = getNearestCollidesObject();
@@ -71,7 +68,8 @@ public class PlayerInteraction : MonoBehaviour
                 if (currenObjectInCollision.tag == "CraftingItem" && isButtonPressedDown)
                 {
                     currenObjectInCollision.GetComponent<CraftingItem>().BuildingFinished();
-                    Debug.Log("stop budowy");
+                    movement.EnableMovement();
+                   // Debug.Log("stop budowy");
 
                 }
             }
@@ -81,7 +79,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     if(currenObjectInCollision.GetComponent<CraftingItem>().PutItem(holdigPickup))
                     {
-                        Debug.Log("udało się wsadzić item");
+                      //  Debug.Log("udało się wsadzić item");
                         holdigPickup.gameObject.transform.SetParent(currenObjectInCollision.transform);
                         holdigPickup.gameObject.SetActive(false);
                         holdigPickup = null;
@@ -90,7 +88,7 @@ public class PlayerInteraction : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("nie mozesz wsadzić itemu");
+                      //  Debug.Log("nie mozesz wsadzić itemu");
                     }    
                 }
 
@@ -106,8 +104,9 @@ public class PlayerInteraction : MonoBehaviour
                 if (item.AreRequirementsFullfilled())
                 {
                     item.BuildingStarted();
+                    movement.DisableMovement();
                     isButtonPressedDown = true;
-                    Debug.Log("start budowy");
+                   // Debug.Log("start budowy");
                 }
 
             }
@@ -118,8 +117,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void PickItem()
     {
-        // TODO: Play animator - podniesienie rąk
-        Debug.Log("pick");
+        //Debug.Log("pick");
+        movement.PlayerHoldItem();
         holdigPickup.transform.SetParent(transform);
         holdigPickup.transform.localPosition = new Vector3(0, 0, 1f);
         ShowText(false);
@@ -127,17 +126,12 @@ public class PlayerInteraction : MonoBehaviour
 
     private void DropItem()
     {
-        // TODO: Play animator - opuszczenie rąk
-        Debug.Log("drop");
+        //Debug.Log("drop");
+        movement.PlayerReleasedItem();
         OnTriggerExit(holdigPickup.Collider);
         OnTriggerEnter(holdigPickup.Collider);
         holdigPickup.transform.SetParent(null);
         holdigPickup = null;
-    }
-
-    private void HoldingCraftingItem(GameObject item, float time)
-    {
-        Debug.Log(item.name + time);
     }
 
     private GameObject getNearestCollidesObject()
@@ -158,13 +152,6 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
         return objWithMinDistance;
-    }
-
-    public void OnChangeActiveItem()
-    {
-        
-        // TODO: wyświetlenie aktywnego itemu
-        ///   holdingItem.GetComponent<Pickup>().iconDisabled;
     }
 
     public void ShowText(bool displayText)

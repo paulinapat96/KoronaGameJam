@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5638422968101671014}
   - component: {fileID: 2989898856504852892}
   - component: {fileID: 1630895618}
+  - component: {fileID: 1353932690}
   m_Layer: 0
   m_Name: Pickup
   m_TagString: Pickup
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c95708e3f38a6da4394ce58e86aaeba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,6 +113,19 @@ MonoBehaviour:
   _IconEnabled: {fileID: 21300000, guid: 59c40b74dbff4f64a9e0ed9872811c17, type: 3}
   _Collider: {fileID: 5638422968101671014}
 --- !u!65 &1630895618
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553119524409018882}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1353932690
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
