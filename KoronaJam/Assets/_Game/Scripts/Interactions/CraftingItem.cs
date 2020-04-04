@@ -9,7 +9,7 @@ using UnityEngine;
 public class CraftingItem : MonoBehaviour
 {
     [Title("Name")]
-    [SerializeField] private string Name;
+    [SerializeField] private string _Name;
 
     [Title("Local refs")] [Required]
     [SerializeField] private RequiredItemsDisplayer _ItemsDisplayer;
@@ -29,7 +29,8 @@ public class CraftingItem : MonoBehaviour
 
 
     public event Action OnComplete;
-    
+
+    public string Name => _Name;
 
     private bool[] _ownedItems;
 
