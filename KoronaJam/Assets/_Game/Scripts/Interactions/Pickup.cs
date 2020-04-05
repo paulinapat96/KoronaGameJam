@@ -22,7 +22,8 @@ public class Pickup : MonoBehaviour
     private void Start()
     {
         renderer = GetComponentInChildren<Renderer>();
-        Material newMaterial = Instantiate(renderer.material); //new Material(renderer.material);
+        Material newMaterial = renderer.material;
+        newMaterial.EnableKeyword("_EMISSION");
         renderer.material = newMaterial;
         renderer.gameObject.SetActive(false);
         renderer.gameObject.SetActive(true);
