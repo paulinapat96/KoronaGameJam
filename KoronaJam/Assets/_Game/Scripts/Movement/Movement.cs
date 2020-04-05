@@ -16,6 +16,7 @@ namespace Gameplay
 		
 		[Title("Local refs")] 
 		[SerializeField] private CharacterController _CharacterController;
+		[SerializeField] private Animator _PlayerAnimator;
 
 		[Title("Settings")] 
 		[SerializeField] private float _SpeedModifier = 1;
@@ -56,12 +57,15 @@ namespace Gameplay
 			_CharacterController.center = new Vector3(0, 0, _HoldingItem_Center);
 			_CharacterController.radius = _HoldingItem_Radius;
 
+			_PlayerAnimator.SetBool("HoldItem", true);
 		}
 
 		public void PlayerReleasedItem()
 		{
 			_CharacterController.center = new Vector3(0, 0, _NonHoldingItem_Center);
 			_CharacterController.radius = _NonHoldingItem_Radius;
+			
+			_PlayerAnimator.SetBool("HoldItem", false);
 		}
 
 		private void Awake()
@@ -74,6 +78,7 @@ namespace Gameplay
 		{
 			ProcessMovement();
 			ProcessRotation();
+			
 		}
 
 		private void SetDefaultSpeed()
@@ -96,6 +101,13 @@ namespace Gameplay
 			normalizedMovementOffset *= _currentSpeedModifier * Time.deltaTime;
 			
 			_CharacterController.Move(normalizedMovementOffset);
+
+			var fwdDotProduct = Vector3.Dot(transform.forward, _CharacterController.velocity);
+			var rightDotProduct = Vector3.Dot(transform.right, _CharacterController.velocity);
+			
+			_PlayerAnimator.SetFloat("Speed", Mathf.Abs(fwdDotProduct));
+			_PlayerAnimator.SetFloat("Speed_Horizontal", rightDotProduct);
+
 		}
 
 		private void ProcessRotation()
