@@ -10,16 +10,24 @@ public class RequiredItemsDisplayer : MonoBehaviour
 
     [Title("Local refs")] 
     [SerializeField] private Transform _ItemsContainer;
+    
+    private Dictionary<Pickup, RequiredItem> _items;
 
     public void SetData(List<Pickup> pickups)
     {
+        _items = new Dictionary<Pickup, RequiredItem>();
+        
         pickups.ForEach(arg =>
         {
             var ob = Instantiate(_RequiredItemsPrefab, Vector3.zero, Quaternion.identity, _ItemsContainer);
             ob.transform.localPosition = Vector3.zero;
             ob.SetSprite(arg.IconDisabled, false);
+
+            _items.Add(arg, ob);
         });
     }
+    
+    
 
     public void ReleaseAllObjects()
     {
@@ -37,5 +45,17 @@ public class RequiredItemsDisplayer : MonoBehaviour
     public void Hide()
     {
         _ItemsContainer.gameObject.SetActive(false);
+    }
+
+    public void UpdateState(Pickup receivedItem)
+    {
+        if (_items.ContainsKey(receivedItem))
+        {
+            _items[receivedItem].SetSprite(receivedItem.IconEnabled, true);
+        }
+        else
+        {
+            Debug.LogError("Brought item which was not expected. WTF");
+        }
     }
 }

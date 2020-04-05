@@ -136,6 +136,7 @@ public class CraftingItem : MonoBehaviour
                 return false;
             }
 
+            _ItemsDisplayer.UpdateState(item);
             _ownedItems[index] = true;
 
             return true;
