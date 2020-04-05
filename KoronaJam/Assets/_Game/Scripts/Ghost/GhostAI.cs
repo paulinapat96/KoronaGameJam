@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Gameplay;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -24,6 +25,9 @@ namespace _Game.Scripts
 
 		[SerializeField] private float _DistToAttack = 5.0f;
 		[SerializeField] private float _AttackFrequency = 3;
+
+		[SerializeField] private float _AngleGreaterThan = 350f;
+		[SerializeField] private float _AngleLowerThan = 10f;
 
 		[SerializeField] private PlayerInteractionController _target;
 
@@ -152,7 +156,7 @@ namespace _Game.Scripts
 		private bool PlayerIsLookingAtMe()
 		{
 			var angle = AngleBetweenMeAndTarget;
-			return angle > 330 || angle < 30;
+			return angle > _AngleGreaterThan || angle < _AngleLowerThan;
 		}
 	}
 }
