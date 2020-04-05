@@ -51,9 +51,10 @@ namespace _Game.Scripts
 			_currentSpeed = _Speed;
 
 			var render = GetComponentInChildren<MeshRenderer>();
-			_myMaterial = new Material(render.sharedMaterial);
-			render.material = _myMaterial;
+			_myMaterial = render.material;
 			
+			_myMaterial.EnableKeyword("_EMISSION");
+
 			_myMaterial.SetFloat("_EmissionMap", 1);
 			_myMaterial.SetColor("_EmissionColor", Color.red * 0f);
 		}

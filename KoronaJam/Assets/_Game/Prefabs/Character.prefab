@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 1114579152}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 4301781812294025164}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 257198689056368490}
   - component: {fileID: 1876061869445901236}
   - component: {fileID: 140414826637919072}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -660,6 +660,7 @@ MonoBehaviour:
   _Camera: {fileID: 0}
   _CharacterController: {fileID: 1876061869445901236}
   _SpeedModifier: 8
+  _StunnedSpeedModifier: 0
   _NonHoldingItem_Center: 0
   _NonHoldingItem_Radius: 0.7
   _HoldingItem_Center: 0.6
