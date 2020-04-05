@@ -1,7 +1,6 @@
-using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Timeline;
+using UnityEngine.UI;
 
 namespace Gameplay
 {
@@ -12,10 +11,14 @@ namespace Gameplay
 		[SerializeField] private Movement _Movement;
 		[SerializeField] private GameObject _Flashlight;
 
+		[SerializeField] private GameObject _StunSection;
+		[SerializeField] private Image _StunCircle;
+		
 		[Title("Settings")] 
 		[SerializeField] private float _StunDuration;
 		[SerializeField] private float _AfterStunProtection = 3;
 
+		private float _timeOfStun;
 		private float _timeOfUnlock;
 		private bool _playerIsStunned = false;
 
@@ -30,6 +33,7 @@ namespace Gameplay
 			// PlayerInteraction	
 			_Movement.PlayerHasBeenStunned();
 
+			_timeOfStun = Time.time;
 			_timeOfUnlock = Time.time + _StunDuration;
 			_timeOfNextPossibleStun = _timeOfUnlock + _AfterStunProtection;
 			_playerIsStunned = true;
@@ -61,6 +65,14 @@ namespace Gameplay
 				Debug.Log("Restored from stun");
 				_Movement.PlayerRestoredFromStun();
 				_playerIsStunned = false;
+				_StunSection.SetActive(false);
+			}
+			else
+			{
+				var stunProgress = (Time.time - _timeOfStun) / (_timeOfUnlock - _timeOfStun);
+				
+				_StunSection.SetActive(true);
+				_StunCircle.fillAmount = stunProgress;
 			}
 		}
 	}
