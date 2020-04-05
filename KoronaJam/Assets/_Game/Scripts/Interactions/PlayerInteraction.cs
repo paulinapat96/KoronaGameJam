@@ -30,8 +30,6 @@ public class PlayerInteraction : MonoBehaviour
             objectsInCollisionList.Add(other.gameObject);
             currenObjectInCollision = getNearestCollidesObject();
             if(!holdingPickup) ShowText(true);
-            
-          //  if(currenObjectInCollision.CompareTag("Pickup"))  currenObjectInCollision.GetComponent<Pickup>().ChangeHighlight(true);
         }
         else if (other.CompareTag("CraftingItem"))
         {
@@ -39,7 +37,7 @@ public class PlayerInteraction : MonoBehaviour
             var craftingItem = other.GetComponent<CraftingItem>();
             currenObjectInCollision = other.gameObject;
             
-            if ((craftingItem.IsUnlocked && craftingItem.AreRequirementsFullfilled()) || craftingItem.CanPutItem(holdingPickup))/////////
+            if ((craftingItem.IsUnlocked && craftingItem.AreRequirementsFullfilled()) || (holdingPickup && craftingItem.CanPutItem(holdingPickup)))/////////
             {
                 ShowText(true);
             }
@@ -79,7 +77,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     currenObjectInCollision.GetComponent<CraftingItem>().BuildingFinished();
                     movement.EnableMovement();
-                //    Debug.Log("stop budowy");
+                //  Debug.Log("stop budowy");
 
                 }
             }
@@ -143,6 +141,7 @@ public class PlayerInteraction : MonoBehaviour
         holdingPickup.transform.SetParent(null);
         holdingPickup = null;
         if (!isItemDestroing) OnTriggerEnter(temp.Collider);
+        else ShowText(true);
 
     }
 
