@@ -61,6 +61,7 @@ MonoBehaviour:
   _ItemName: Wig
   _IconDisabled: {fileID: 21300000, guid: 58c9a153e01c98c4caf8df0bd4dc9a6c, type: 3}
   _IconEnabled: {fileID: 21300000, guid: 03440aa3fb6cc144fadafedeef4cdda6, type: 3}
+  _HoldingItemPosition: {x: 0, y: 0, z: 0.69}
   _Collider: {fileID: 6569995992836348712}
 --- !u!65 &6119711712880410672
 BoxCollider:

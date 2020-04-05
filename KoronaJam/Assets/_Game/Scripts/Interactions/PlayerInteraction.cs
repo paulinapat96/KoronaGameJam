@@ -9,7 +9,6 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private GameObject pressETextObject;
     [SerializeField] private GameObject playerCanvas;
     [SerializeField] private Movement movement;
-    [SerializeField] private Vector3 _HoldingPosition;
     
     Pickup holdigPickup = null;
     GameObject holdingCraftinItem = null;
@@ -127,7 +126,7 @@ public class PlayerInteraction : MonoBehaviour
         Debug.Log("pick");
         movement.PlayerHoldItem();
         holdigPickup.transform.SetParent(transform);
-        holdigPickup.transform.localPosition = _HoldingPosition;
+        holdigPickup.transform.localPosition = holdigPickup.HoldingItemPosition;
         ShowText(false);
     }
 

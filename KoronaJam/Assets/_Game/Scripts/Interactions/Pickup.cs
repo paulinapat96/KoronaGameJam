@@ -9,6 +9,8 @@ public class Pickup : MonoBehaviour
     [SerializeField] private string _ItemName;
     [SerializeField] private Sprite _IconDisabled;
     [SerializeField] private Sprite _IconEnabled;
+    [SerializeField] private Vector3 _HoldingItemPosition;
+    
     private Renderer renderer;
 
     [Title("Local refs")]
@@ -17,7 +19,7 @@ public class Pickup : MonoBehaviour
     public Sprite IconDisabled => _IconDisabled;
     public string ItemName => _ItemName;
     public Collider Collider => _Collider;
-
+    public Vector3 HoldingItemPosition => _HoldingItemPosition;
 
     private void Start()
     {
