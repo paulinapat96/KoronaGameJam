@@ -48,7 +48,10 @@ public class CraftingItem : MonoBehaviour
         InitializeOwnedItems();
         UnlockIfPossible();
 
-        if ( !_RequiredItemsToTrigger.IsNullOrEmpty() ) _ItemsDisplayer.SetData(_RequiredItemsToTrigger);
+        if ( !_RequiredPreviousActions.IsNullOrEmpty() )
+        {
+            _ItemsDisplayer.Hide();
+        }
     }
 
 
@@ -83,6 +86,9 @@ public class CraftingItem : MonoBehaviour
 
     private void Unlock()
     {
+        _ItemsDisplayer.Show();
+        _ItemsDisplayer.SetData(_RequiredItemsToTrigger);
+
         _isLocked = false;
     }
 
@@ -117,8 +123,9 @@ public class CraftingItem : MonoBehaviour
 
     public bool CanPutItem(Pickup item)
     {
+        if (item == null) return false;
         if (_RequiredItemsToTrigger == null) return false;
-
+        
         return _RequiredItemsToTrigger.Contains(item);
 
     }
