@@ -1,13 +1,14 @@
 ﻿using Sirenix.Utilities;
 using System.Collections;
 using System.Collections.Generic;
+using Gameplay;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject pressETextObject;
     [SerializeField] private GameObject playerCanvas;
-    [SerializeField] private Movement.Movement movement;
+    [SerializeField] private Movement movement;
     Pickup holdigPickup = null;
     GameObject holdingCraftinItem = null;
     private GameObject currenObjectInCollision = null;

@@ -125,6 +125,8 @@ public class CraftingItem : MonoBehaviour
     
     public bool PutItem(Pickup item)
     {
+        Debug.Log(item.name + " wants to be put");
+
         if (_RequiredItemsToTrigger.Contains(item))
         {
             var index = _RequiredItemsToTrigger.IndexOf(item);

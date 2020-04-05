@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Movement
+namespace Gameplay
 {
 	public class Movement : MonoBehaviour
 	{
@@ -19,13 +19,15 @@ namespace Movement
 
 		[Title("Settings")] 
 		[SerializeField] private float _SpeedModifier = 1;
+		[SerializeField] private float _StunnedSpeedModifier = 1;
 		[SerializeField] private float _NonHoldingItem_Center = 0;
 		[SerializeField] private float _NonHoldingItem_Radius = 0;
 		[SerializeField] private float _HoldingItem_Center = 0;
 		[SerializeField] private float _HoldingItem_Radius = 0;
-		
 
+		private float _currentSpeedModifier;
 		private bool _movementEnabled = true;
+		private bool _playerIsStunned = false;
 
 		public void DisableMovement()
 		{
@@ -35,6 +37,18 @@ namespace Movement
 		public void EnableMovement()
 		{
 			_movementEnabled = true;
+		}
+
+		public void PlayerHasBeenStunned()
+		{
+			_currentSpeedModifier = _StunnedSpeedModifier;
+			_playerIsStunned = true;
+		}
+
+		public void PlayerRestoredFromStun()
+		{
+			_currentSpeedModifier = _SpeedModifier;
+			_playerIsStunned = false;
 		}
 
 		public void PlayerHoldItem()
@@ -53,6 +67,7 @@ namespace Movement
 		private void Awake()
 		{
 			PlayerReleasedItem();
+			SetDefaultSpeed();
 		}
 
 		private void Update()
@@ -61,6 +76,11 @@ namespace Movement
 			ProcessRotation();
 		}
 
+		private void SetDefaultSpeed()
+		{
+			_currentSpeedModifier = _SpeedModifier;
+		}
+		
 		private void ProcessMovement()
 		{
 			if (!_movementEnabled) return;
@@ -73,13 +93,15 @@ namespace Movement
 			var normalizedMovementOffset = movementOffset.magnitude > 1 ? movementOffset.normalized : movementOffset;
 			
 			normalizedMovementOffset -= Vector3.up * 9.81f;
-			normalizedMovementOffset *= _SpeedModifier * Time.deltaTime;
+			normalizedMovementOffset *= _currentSpeedModifier * Time.deltaTime;
 			
 			_CharacterController.Move(normalizedMovementOffset);
 		}
 
 		private void ProcessRotation()
 		{
+			if (_playerIsStunned) return;
+			
 			var mousePosition = Input.mousePosition;
 			var trackedPosition = _Camera.WorldToScreenPoint(transform.position);
 			
