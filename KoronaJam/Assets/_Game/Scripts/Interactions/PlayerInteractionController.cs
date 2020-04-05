@@ -1,6 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 namespace Gameplay
 {
@@ -12,16 +13,22 @@ namespace Gameplay
 
 		[Title("Settings")] 
 		[SerializeField] private float _StunDuration;
+		[SerializeField] private float _AfterStunProtection = 3;
 
 		private float _timeOfUnlock;
 		private bool _playerIsStunned = false;
+
+		private float _timeOfNextPossibleStun;
 		
 		public void PlayerHasBeenStunned()
 		{
+			if (Time.time < _timeOfNextPossibleStun) return;
+			
 			// PlayerInteraction	
 			_Movement.PlayerHasBeenStunned();
 
 			_timeOfUnlock = Time.time + _StunDuration;
+			_timeOfNextPossibleStun = _timeOfUnlock + _AfterStunProtection;
 			_playerIsStunned = true;
 		}
 

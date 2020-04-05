@@ -58,8 +58,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("HoldingItem: " + holdigPickup + " HoldingCraftinItem: " + holdingCraftinItem);
-        Debug.Log("currObjInCol: " + currenObjectInCollision + " List: " + objectsInCollisionList.Count);
+        // Debug.Log("HoldingItem: " + holdigPickup + " HoldingCraftinItem: " + holdingCraftinItem);
+        // Debug.Log("currObjInCol: " + currenObjectInCollision + " List: " + objectsInCollisionList.Count);
         if (Input.GetKeyUp(KeyCode.E) && currenObjectInCollision)
         {
             //currenObjectInCollision = getNearestCollidesObject();
