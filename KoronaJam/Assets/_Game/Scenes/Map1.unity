@@ -1447,6 +1447,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 269053217}
     m_Modifications:
+    - target: {fileID: 969596448, guid: 752ac4326f570ea48971aa5686284b60, type: 3}
+      propertyPath: m_Name
+      value: Wall (9)_R
+      objectReference: {fileID: 0}
     - target: {fileID: 1341247973, guid: 752ac4326f570ea48971aa5686284b60, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
@@ -2335,6 +2339,45 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1951502449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3714331407255832948, guid: 752ac4326f570ea48971aa5686284b60,
+    type: 3}
+  m_PrefabInstance: {fileID: 1404332907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1951502450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951502449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569aa062f2c13ef46ab1d75cf09f8ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 1951502451}
+  _TriggerName: proceed
+--- !u!95 &1951502451
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951502449}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f60a0e2a5a5f05444be3385b3b5d87a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1951526018 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7938153810527669295, guid: 6fb370741ffb9264d817330c25a7f1c4,
@@ -4352,7 +4395,7 @@ PrefabInstance:
     - target: {fileID: 2264395959885067055, guid: 3eef20e93f1467945a51761bcba721cc,
         type: 3}
       propertyPath: _AbstractJobResults.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2264395959885067055, guid: 3eef20e93f1467945a51761bcba721cc,
         type: 3}
@@ -4369,6 +4412,11 @@ PrefabInstance:
       propertyPath: _AbstractJobResults.Array.data[0]
       value: 
       objectReference: {fileID: 694260516}
+    - target: {fileID: 2264395959885067055, guid: 3eef20e93f1467945a51761bcba721cc,
+        type: 3}
+      propertyPath: _AbstractJobResults.Array.data[1]
+      value: 
+      objectReference: {fileID: 1951502450}
     - target: {fileID: 8524395423250830668, guid: 3eef20e93f1467945a51761bcba721cc,
         type: 3}
       propertyPath: m_Name
