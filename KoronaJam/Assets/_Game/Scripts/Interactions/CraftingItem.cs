@@ -146,6 +146,11 @@ public class CraftingItem : MonoBehaviour
             _ItemsDisplayer.UpdateState(item);
             _ownedItems[index] = true;
 
+            if (_ownedItems.All(arg => arg == true) && _CraftingTime == 0)
+            {
+                BuildingStarted();
+            }
+
             return true;
         }
         
