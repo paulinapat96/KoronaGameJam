@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Gameplay
@@ -78,7 +75,7 @@ namespace Gameplay
 		{
 			ProcessMovement();
 			ProcessRotation();
-			
+			ProcessFlashlight();
 		}
 
 		private void SetDefaultSpeed()
@@ -123,6 +120,13 @@ namespace Gameplay
 			var angle = 90 - Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
 			
 			transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
+		}
+
+		private void ProcessFlashlight()
+		{
+			if (_playerIsStunned) return;
+			
+			
 		}
 
 	}

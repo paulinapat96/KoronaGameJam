@@ -9,6 +9,8 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private GameObject pressETextObject;
     [SerializeField] private GameObject playerCanvas;
     [SerializeField] private Movement movement;
+    [SerializeField] private Vector3 _HoldingPosition;
+    
     Pickup holdigPickup = null;
     GameObject holdingCraftinItem = null;
     private GameObject currenObjectInCollision = null;
@@ -118,7 +120,7 @@ public class PlayerInteraction : MonoBehaviour
             }
 
         }
-       if(isCanvasActive) playerCanvas.transform.rotation = Quaternion.Euler(0, -transform.rotation.y, 0);
+        if(isCanvasActive) playerCanvas.transform.rotation = Quaternion.Euler(0, -transform.rotation.y, 0);
     }
 
     private void PickItem()
@@ -126,7 +128,7 @@ public class PlayerInteraction : MonoBehaviour
         Debug.Log("pick");
         movement.PlayerHoldItem();
         holdigPickup.transform.SetParent(transform);
-        holdigPickup.transform.localPosition = new Vector3(0, 0, 1f);
+        holdigPickup.transform.localPosition = _HoldingPosition;
         ShowText(false);
     }
 

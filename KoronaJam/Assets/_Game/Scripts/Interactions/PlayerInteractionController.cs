@@ -10,6 +10,7 @@ namespace Gameplay
 		[Title("Local refs")] 
 		[SerializeField] private PlayerInteraction _PlayerInteraction;
 		[SerializeField] private Movement _Movement;
+		[SerializeField] private GameObject _Flashlight;
 
 		[Title("Settings")] 
 		[SerializeField] private float _StunDuration;
@@ -19,7 +20,9 @@ namespace Gameplay
 		private bool _playerIsStunned = false;
 
 		private float _timeOfNextPossibleStun;
-		
+		public bool HasFlashlightEnabled => _isUsingFlashlight;
+		private bool _isUsingFlashlight;
+
 		public void PlayerHasBeenStunned()
 		{
 			if (Time.time < _timeOfNextPossibleStun) return;
@@ -34,14 +37,30 @@ namespace Gameplay
 
 		private void Update()
 		{
+			_isUsingFlashlight = false;
+			
 			if (_playerIsStunned)
 			{
-				if (_timeOfUnlock < Time.time)
+				HandleStunning();
+			}
+			else
+			{
+				if (Input.GetMouseButton(1))
 				{
-					Debug.Log("Restored from stun");
-					_Movement.PlayerRestoredFromStun();
-					_playerIsStunned = false;
+					_isUsingFlashlight = true;
 				}
+			}
+			
+			_Flashlight.gameObject.SetActive(_isUsingFlashlight);
+		}
+
+		private void HandleStunning()
+		{
+			if (_timeOfUnlock < Time.time)
+			{
+				Debug.Log("Restored from stun");
+				_Movement.PlayerRestoredFromStun();
+				_playerIsStunned = false;
 			}
 		}
 	}

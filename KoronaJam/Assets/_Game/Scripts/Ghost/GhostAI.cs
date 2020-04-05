@@ -68,7 +68,7 @@ namespace _Game.Scripts
 		{
 			if (_target == null) return;
 
-			if ( PlayerIsLookingAtMe() && PlayerIsCloseEnough() )
+			if ( PlayerHasFlashlight() && PlayerIsLookingAtMe() && PlayerIsCloseEnough() )
 			{
 				_myHP -= _TakenDmgPerSec * Time.deltaTime;
 				_currentSpeed = _Speed_WhenPlayerLooks;
@@ -93,6 +93,11 @@ namespace _Game.Scripts
 		private void KillGhost()
 		{
 			Destroy(gameObject);
+		}
+
+		private bool PlayerHasFlashlight()
+		{
+			return _target.HasFlashlightEnabled;
 		}
 
 		private void FollowOrAttackPlayer()
