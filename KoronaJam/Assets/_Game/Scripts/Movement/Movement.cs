@@ -22,6 +22,7 @@ namespace Gameplay
 		[SerializeField] private float _NonHoldingItem_Radius = 0;
 		[SerializeField] private float _HoldingItem_Center = 0;
 		[SerializeField] private float _HoldingItem_Radius = 0;
+		[SerializeField] private float _PunchDistance = 3;
 
 		private float _currentSpeedModifier;
 		private bool _movementEnabled = true;
@@ -37,10 +38,12 @@ namespace Gameplay
 			_movementEnabled = true;
 		}
 
-		public void PlayerHasBeenStunned()
+		public void PlayerHasBeenStunned(Transform fromWho)
 		{
 			_currentSpeedModifier = _StunnedSpeedModifier;
 			_playerIsStunned = true;
+
+			PunchPlayer(fromWho);
 		}
 
 		public void PlayerRestoredFromStun()
@@ -127,6 +130,12 @@ namespace Gameplay
 			if (_playerIsStunned) return;
 			
 			
+		}
+
+		private void PunchPlayer(Transform fromWho)
+		{
+			var diff = (transform.position - fromWho.position) * _PunchDistance;
+			_CharacterController.Move(diff);
 		}
 
 	}

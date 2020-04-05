@@ -26,12 +26,12 @@ namespace Gameplay
 		public bool HasFlashlightEnabled => _isUsingFlashlight;
 		private bool _isUsingFlashlight;
 
-		public void PlayerHasBeenStunned()
+		public void PlayerHasBeenStunned(Transform fromWho)
 		{
 			if (Time.time < _timeOfNextPossibleStun) return;
 			
 			// PlayerInteraction	
-			_Movement.PlayerHasBeenStunned();
+			_Movement.PlayerHasBeenStunned(fromWho);
 
 			_timeOfStun = Time.time;
 			_timeOfUnlock = Time.time + _StunDuration;

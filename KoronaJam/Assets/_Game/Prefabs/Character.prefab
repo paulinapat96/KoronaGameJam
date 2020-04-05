@@ -723,6 +723,7 @@ MonoBehaviour:
   _NonHoldingItem_Radius: 0.7
   _HoldingItem_Center: 0.6
   _HoldingItem_Radius: 0.7
+  _PunchDistance: 0.2
 --- !u!136 &257198689056368490
 CapsuleCollider:
   m_ObjectHideFlags: 0

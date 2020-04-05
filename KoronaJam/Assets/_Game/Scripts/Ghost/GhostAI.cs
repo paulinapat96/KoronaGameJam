@@ -129,7 +129,7 @@ namespace _Game.Scripts
 			if (_lastAttackTime + _AttackFrequency < Time.time)
 			{
 				Debug.Log("Stun!");
-				_target.PlayerHasBeenStunned();
+				_target.PlayerHasBeenStunned(transform);
 				
 				_lastAttackTime = Time.time;
 			}
