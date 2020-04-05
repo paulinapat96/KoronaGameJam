@@ -59,8 +59,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ItemName: Dynamit
-  _IconDisabled: {fileID: 21300000, guid: 7c55c9a317bff6648bab49ab9c9a3159, type: 3}
-  _IconEnabled: {fileID: 21300000, guid: 59c40b74dbff4f64a9e0ed9872811c17, type: 3}
+  _IconDisabled: {fileID: 21300000, guid: bf9335e7fb9aed7469ed03e696478068, type: 3}
+  _IconEnabled: {fileID: 21300000, guid: 243a573f0e1d8f048add5180cc8a8697, type: 3}
+  _HoldingItemPosition: {x: 0.163, y: 0, z: 0.207}
   _Collider: {fileID: 677807337932676565}
 --- !u!65 &5140786399357309711
 BoxCollider:

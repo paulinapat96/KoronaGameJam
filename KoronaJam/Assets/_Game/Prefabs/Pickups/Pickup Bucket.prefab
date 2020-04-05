@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ItemName: Bucket
-  _IconDisabled: {fileID: 21300000, guid: 7c55c9a317bff6648bab49ab9c9a3159, type: 3}
-  _IconEnabled: {fileID: 21300000, guid: 59c40b74dbff4f64a9e0ed9872811c17, type: 3}
+  _IconDisabled: {fileID: 21300000, guid: c7363adcca9945d4c934e8bb989c2bfa, type: 3}
+  _IconEnabled: {fileID: 21300000, guid: d778f5663200227428e77a4c59738f9b, type: 3}
+  _HoldingItemPosition: {x: -0.015, y: 0, z: 0.393}
   _Collider: {fileID: 5210777171302855890}
 --- !u!1 &3482260067545913873
 GameObject:

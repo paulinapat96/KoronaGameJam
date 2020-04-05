@@ -58,9 +58,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6ad71adc7dc58488c68cc2c56231a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ItemName: Empty
-  _IconDisabled: {fileID: 21300000, guid: 7c55c9a317bff6648bab49ab9c9a3159, type: 3}
-  _IconEnabled: {fileID: 21300000, guid: 59c40b74dbff4f64a9e0ed9872811c17, type: 3}
+  _ItemName: Paint Bucket
+  _IconDisabled: {fileID: 21300000, guid: fd88ab5900885d14fbbe1efc2964d4fe, type: 3}
+  _IconEnabled: {fileID: 21300000, guid: dc0146ece80c44d419787a5a3b1d3cf0, type: 3}
+  _HoldingItemPosition: {x: 0, y: 0, z: 0.585}
   _Collider: {fileID: 8863573124908157006}
 --- !u!1001 &2692276868831888161
 PrefabInstance:
