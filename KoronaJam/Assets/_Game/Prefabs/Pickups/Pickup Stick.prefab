@@ -74,7 +74,7 @@ MonoBehaviour:
   _ItemName: Stick
   _IconDisabled: {fileID: 21300000, guid: b450215e39f9ccc49ad59367d8df587d, type: 3}
   _IconEnabled: {fileID: 21300000, guid: 4f795305eec1d9840b77aefb694c3c76, type: 3}
-  _HoldingItemPosition: {x: 0.232, y: 0, z: 0.321}
+  _HoldingItemPosition: {x: 0.33, y: -0.249, z: 0.281}
   _Collider: {fileID: 4201700658674804364}
 --- !u!1001 &3953628547831083219
 PrefabInstance:

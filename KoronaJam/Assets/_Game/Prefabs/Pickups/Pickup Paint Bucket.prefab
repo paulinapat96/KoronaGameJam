@@ -61,7 +61,7 @@ MonoBehaviour:
   _ItemName: Paint Bucket
   _IconDisabled: {fileID: 21300000, guid: fd88ab5900885d14fbbe1efc2964d4fe, type: 3}
   _IconEnabled: {fileID: 21300000, guid: dc0146ece80c44d419787a5a3b1d3cf0, type: 3}
-  _HoldingItemPosition: {x: 0, y: 0, z: 0.585}
+  _HoldingItemPosition: {x: 0, y: 0, z: 0.525}
   _Collider: {fileID: 8863573124908157006}
 --- !u!1001 &2692276868831888161
 PrefabInstance:
