@@ -10,7 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private GameObject playerCanvas;
     [SerializeField] private Movement movement;
     
-    Pickup holdigPickup = null;
+    Pickup holdingPickup = null;
     GameObject holdingCraftinItem = null;
     private GameObject currenObjectInCollision = null;
     List<GameObject> objectsInCollisionList;
@@ -29,7 +29,8 @@ public class PlayerInteraction : MonoBehaviour
         {   
             objectsInCollisionList.Add(other.gameObject);
             currenObjectInCollision = getNearestCollidesObject();
-            ShowText(true);
+            if(!holdingPickup) ShowText(true);
+            
           //  if(currenObjectInCollision.CompareTag("Pickup"))  currenObjectInCollision.GetComponent<Pickup>().ChangeHighlight(true);
         }
         else if (other.CompareTag("CraftingItem"))
@@ -38,7 +39,7 @@ public class PlayerInteraction : MonoBehaviour
             var craftingItem = other.GetComponent<CraftingItem>();
             currenObjectInCollision = other.gameObject;
             
-            if (craftingItem.IsUnlocked && craftingItem.AreRequirementsFullfilled())
+            if ((craftingItem.IsUnlocked && craftingItem.AreRequirementsFullfilled()) || craftingItem.CanPutItem(holdingPickup))/////////
             {
                 ShowText(true);
             }
@@ -65,12 +66,12 @@ public class PlayerInteraction : MonoBehaviour
 
             Debug.Log("currObjInCol: " + currenObjectInCollision + " List: " + objectsInCollisionList.Count);
             //currenObjectInCollision = getNearestCollidesObject();
-            if (!holdigPickup)
+            if (!holdingPickup)
             {
                 
                 if (currenObjectInCollision.tag == "Pickup")
                 {
-                    holdigPickup = currenObjectInCollision.GetComponent<Pickup>();
+                    holdingPickup = currenObjectInCollision.GetComponent<Pickup>();
                     PickItem();
                 }
 
@@ -86,13 +87,13 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if(currenObjectInCollision.tag == "CraftingItem")
                 {
-                    if(currenObjectInCollision.GetComponent<CraftingItem>().PutItem(holdigPickup))
+                    if(currenObjectInCollision.GetComponent<CraftingItem>().PutItem(holdingPickup))
                     {
                         Debug.Log("udało się wsadzić item");
-                        holdigPickup.gameObject.transform.SetParent(currenObjectInCollision.transform);
-                        holdigPickup.gameObject.SetActive(false);
+                        holdingPickup.gameObject.transform.SetParent(currenObjectInCollision.transform);
+                        holdingPickup.gameObject.SetActive(false);
                         DropItem(true);
-                        holdigPickup = null;
+                        holdingPickup = null;
                     }
                     else
                     {
@@ -100,13 +101,13 @@ public class PlayerInteraction : MonoBehaviour
                     }    
                 }
 
-                if(holdigPickup) DropItem(false);
+                if(holdingPickup) DropItem(false);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (currenObjectInCollision && currenObjectInCollision.CompareTag("CraftingItem") && !holdigPickup)
+            if (currenObjectInCollision && currenObjectInCollision.CompareTag("CraftingItem") && !holdingPickup)
             {  
                 CraftingItem item = currenObjectInCollision.GetComponent<CraftingItem>();
                 if (item.AreRequirementsFullfilled())
@@ -127,9 +128,9 @@ public class PlayerInteraction : MonoBehaviour
     {
       //  Debug.Log("pick");
         movement.PlayerHoldItem();
-        holdigPickup.transform.SetParent(transform);
-        holdigPickup.transform.localPosition = holdigPickup.HoldingItemPosition;
-        holdigPickup.GetComponent<Pickup>().ChangeHighlight(false);
+        holdingPickup.transform.SetParent(transform);
+        holdingPickup.transform.localPosition = holdingPickup.HoldingItemPosition;
+        holdingPickup.GetComponent<Pickup>().ChangeHighlight(false);
         ShowText(false);
     }
 
@@ -137,10 +138,10 @@ public class PlayerInteraction : MonoBehaviour
     {
        // Debug.Log("drop");
         movement.PlayerReleasedItem();
-        OnTriggerExit(holdigPickup.Collider);
-        Pickup temp = holdigPickup;
-        holdigPickup.transform.SetParent(null);
-        holdigPickup = null;
+        OnTriggerExit(holdingPickup.Collider);
+        Pickup temp = holdingPickup;
+        holdingPickup.transform.SetParent(null);
+        holdingPickup = null;
         if (!isItemDestroing) OnTriggerEnter(temp.Collider);
 
     }
@@ -162,7 +163,7 @@ public class PlayerInteraction : MonoBehaviour
                 if (Vector3.Distance(transform.position, obj.transform.position) < minDis) objWithMinDistance = obj;
             }
         }
-        if(objWithMinDistance.CompareTag("Pickup") && !holdigPickup) objWithMinDistance.GetComponent<Pickup>().ChangeHighlight(true);
+        if(objWithMinDistance.CompareTag("Pickup") && !holdingPickup) objWithMinDistance.GetComponent<Pickup>().ChangeHighlight(true);
         return objWithMinDistance;
     }
 
