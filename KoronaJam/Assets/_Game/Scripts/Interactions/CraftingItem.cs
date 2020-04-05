@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Gameplay;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -24,8 +25,16 @@ public class CraftingItem : MonoBehaviour
     [Title("Triggering - required")] [Required] 
     [SerializeField] private List<AbstractJobResult> _AbstractJobResults;
 
+
+    [Title("Ghosts")] 
+    [SerializeField] private GhostSpawner _GhostSpawner;
+    [SerializeField] private List<Transform> _PlacesToSpawnGhosts;
+
     [Title("Settings")] 
     [SerializeField] private float _CraftingTime;
+
+    [SerializeField] private float _DelayToSpawnGhosts = 0;
+    [SerializeField] private float _DelayToUnlockNextLevel = 0;
 
 
     public event Action OnComplete;
@@ -221,6 +230,25 @@ public class CraftingItem : MonoBehaviour
         _AbstractJobResults?.ForEach(arg => arg.ShowChange());
 
         _alreadyCompleted = true;
+        
+        Invoke(nameof(WaitToSpawnGhosts), _DelayToSpawnGhosts);
+        Invoke(nameof(WaitToShowComplete), _DelayToUnlockNextLevel);
+        
+    }
+
+
+    private void WaitToSpawnGhosts()
+    {
+        if (_GhostSpawner == null)
+        {
+            Debug.LogError($"{name} has no GhostSpawner assigned. there will be no ghosts for it");
+            return;
+        }
+
+        _GhostSpawner.SpawnGhosts(_PlacesToSpawnGhosts);
+    }
+    private void WaitToShowComplete()
+    {
         OnComplete?.Invoke();
     }
 

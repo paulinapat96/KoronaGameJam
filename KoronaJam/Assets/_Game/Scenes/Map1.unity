@@ -660,6 +660,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a5bd7e0821414f438b6cf8f066ab999, type: 3}
+--- !u!4 &655041282 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6342016687539840130, guid: 7a10df26cc9f7af4ab55427ba1591d70,
+    type: 3}
+  m_PrefabInstance: {fileID: 7691586668097500786}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &669007278 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3959432439751844127, guid: 9ed9e3516bbe79742bb936157d4bdbb3,
@@ -1708,6 +1714,11 @@ PrefabInstance:
       propertyPath: _CraftingTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6601471766675932863, guid: d909bad7ebc8b5d45880cfd3e4f29819,
+        type: 3}
+      propertyPath: _GhostSpawner
+      value: 
+      objectReference: {fileID: 1517553018}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d909bad7ebc8b5d45880cfd3e4f29819, type: 3}
 --- !u!1001 &1488827594
@@ -1785,6 +1796,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3482260065983575410}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1517553018 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2268696408628838273, guid: f5c15266fcb24a24796d1ec911a987c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1177606552}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99739c982903634abac9be719fb19c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1550560829 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6560971846316397907, guid: 752ac4326f570ea48971aa5686284b60,
@@ -2211,6 +2234,11 @@ PrefabInstance:
       propertyPath: _AbstractJobResults.Array.data[0]
       value: 
       objectReference: {fileID: 783478715}
+    - target: {fileID: 6601471766675932863, guid: d909bad7ebc8b5d45880cfd3e4f29819,
+        type: 3}
+      propertyPath: _GhostSpawner
+      value: 
+      objectReference: {fileID: 1517553018}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d909bad7ebc8b5d45880cfd3e4f29819, type: 3}
 --- !u!114 &1841587295 stripped
@@ -2801,6 +2829,11 @@ PrefabInstance:
       propertyPath: _AbstractJobResults.Array.data[0]
       value: 
       objectReference: {fileID: 323335882}
+    - target: {fileID: 6601471766675932863, guid: d909bad7ebc8b5d45880cfd3e4f29819,
+        type: 3}
+      propertyPath: _GhostSpawner
+      value: 
+      objectReference: {fileID: 1517553018}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d909bad7ebc8b5d45880cfd3e4f29819, type: 3}
 --- !u!4 &99154129908476788 stripped
@@ -3051,6 +3084,11 @@ PrefabInstance:
       propertyPath: _RequiredItemsToTrigger.Array.data[0]
       value: 
       objectReference: {fileID: 542511260750988429}
+    - target: {fileID: 4683408320785484811, guid: d4e62f6ce084eff439b028a76340ddb1,
+        type: 3}
+      propertyPath: _GhostSpawner
+      value: 
+      objectReference: {fileID: 1517553018}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4e62f6ce084eff439b028a76340ddb1, type: 3}
 --- !u!1001 &1822771903003816695
@@ -3245,6 +3283,11 @@ PrefabInstance:
       propertyPath: _CraftingTime
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4013048282095499719, guid: b88e352bdc015ea48b8c9a2a6dc28c56,
+        type: 3}
+      propertyPath: _GhostSpawner
+      value: 
+      objectReference: {fileID: 1517553018}
     - target: {fileID: 6814309622604144548, guid: b88e352bdc015ea48b8c9a2a6dc28c56,
         type: 3}
       propertyPath: m_Name
@@ -4294,6 +4337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3540711985580262114, guid: 7a10df26cc9f7af4ab55427ba1591d70,
         type: 3}
+      propertyPath: _PlacesToSpawnGhosts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540711985580262114, guid: 7a10df26cc9f7af4ab55427ba1591d70,
+        type: 3}
       propertyPath: _RequiredItemsToTrigger.Array.data[0]
       value: 
       objectReference: {fileID: 1841587295}
@@ -4307,6 +4355,26 @@ PrefabInstance:
       propertyPath: _Name
       value: "Powie\u015B obraz"
       objectReference: {fileID: 0}
+    - target: {fileID: 3540711985580262114, guid: 7a10df26cc9f7af4ab55427ba1591d70,
+        type: 3}
+      propertyPath: _DelayToSpawnGhosts
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540711985580262114, guid: 7a10df26cc9f7af4ab55427ba1591d70,
+        type: 3}
+      propertyPath: _DelayToUnlockNextLevel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540711985580262114, guid: 7a10df26cc9f7af4ab55427ba1591d70,
+        type: 3}
+      propertyPath: _PlacesToSpawnGhosts.Array.data[0]
+      value: 
+      objectReference: {fileID: 655041282}
+    - target: {fileID: 3540711985580262114, guid: 7a10df26cc9f7af4ab55427ba1591d70,
+        type: 3}
+      propertyPath: _GhostSpawner
+      value: 
+      objectReference: {fileID: 1517553018}
     - target: {fileID: 6342016687539840129, guid: 7a10df26cc9f7af4ab55427ba1591d70,
         type: 3}
       propertyPath: m_IsActive
@@ -4417,51 +4485,11 @@ PrefabInstance:
       propertyPath: _AbstractJobResults.Array.data[1]
       value: 
       objectReference: {fileID: 1951502450}
-    - target: {fileID: 6172352987081475875, guid: 3eef20e93f1467945a51761bcba721cc,
+    - target: {fileID: 2264395959885067055, guid: 3eef20e93f1467945a51761bcba721cc,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178812964493371973, guid: 3eef20e93f1467945a51761bcba721cc,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6662331903218434500, guid: 3eef20e93f1467945a51761bcba721cc,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6662331903218434500, guid: 3eef20e93f1467945a51761bcba721cc,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 16.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6662331903218434500, guid: 3eef20e93f1467945a51761bcba721cc,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.00000023843
-      objectReference: {fileID: 0}
-    - target: {fileID: 6662331903218434500, guid: 3eef20e93f1467945a51761bcba721cc,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 13.660089
-      objectReference: {fileID: 0}
-    - target: {fileID: 6662331903218434500, guid: 3eef20e93f1467945a51761bcba721cc,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 15.538351
-      objectReference: {fileID: 0}
-    - target: {fileID: 6662331903218434500, guid: 3eef20e93f1467945a51761bcba721cc,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 13.660089
-      objectReference: {fileID: 0}
-    - target: {fileID: 6818074916413276276, guid: 3eef20e93f1467945a51761bcba721cc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: _GhostSpawner
+      value: 
+      objectReference: {fileID: 1517553018}
     - target: {fileID: 8524395423250830668, guid: 3eef20e93f1467945a51761bcba721cc,
         type: 3}
       propertyPath: m_Name

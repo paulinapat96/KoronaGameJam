@@ -3,19 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Gameplay;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject pressETextObject;
     [SerializeField] private GameObject playerCanvas;
     [SerializeField] private Movement movement;
-    
+
+    [Title("Sounds")]
+    [SerializeField] private AudioClip correctSound;
+    [SerializeField] private AudioClip wrongSound;
+
     Pickup holdingPickup = null;
     GameObject holdingCraftinItem = null;
     private GameObject currenObjectInCollision = null;
     List<GameObject> objectsInCollisionList;
     private bool isButtonPressedDown = false;
     private bool isCanvasActive = false;
+
 
     private void Start()
     {
@@ -91,6 +97,7 @@ public class PlayerInteraction : MonoBehaviour
                     if(currenObjectInCollision.GetComponent<CraftingItem>().PutItem(holdingPickup))
                     {
                         Debug.Log("udało się wsadzić item");
+                        SoundManager.PlaySound(correctSound);
                         holdingPickup.gameObject.transform.SetParent(currenObjectInCollision.transform);
                         holdingPickup.gameObject.SetActive(false);
                         DropItem(true);
@@ -98,6 +105,7 @@ public class PlayerInteraction : MonoBehaviour
                     }
                     else
                     {
+                        SoundManager.PlaySound(wrongSound);
                   //     Debug.Log("nie mozesz wsadzić itemu");
                     }    
                 }

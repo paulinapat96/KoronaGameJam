@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using _Game.Scripts;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Timeline;
 using Random = UnityEngine.Random;
@@ -62,11 +63,26 @@ namespace Gameplay
 			var randomPoint = Random.Range(0, numOfSpawnPoints);
 			var randomPosition = _PossibleSpawnPoints[randomPoint].position;
 			
+			SpawnGhostAtPosition(randomPosition);
+		}
+
+		private void SpawnGhostAtPosition(Vector3 randomPosition)
+		{
 			var ghost = Instantiate(_GhostPrefab, randomPosition, Quaternion.identity, transform);
 			// ghost.transform.localPosition = Vector3.zero;
-			
-			ghost.SetTarget(_Player);
 
+			ghost.SetTarget(_Player);
+		}
+
+		public void SpawnGhosts(List<Transform> placesToSpawnGhosts)
+		{
+			if (placesToSpawnGhosts.IsNullOrEmpty()) return;
+			
+			placesToSpawnGhosts.ForEach(arg =>
+			{
+				if (arg == null) return;
+				SpawnGhostAtPosition(arg.position);
+			});
 		}
 	}
 }
