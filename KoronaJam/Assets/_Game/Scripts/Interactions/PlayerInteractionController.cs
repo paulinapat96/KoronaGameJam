@@ -56,6 +56,7 @@ namespace Gameplay
 			}
 			
 			_Flashlight.gameObject.SetActive(_isUsingFlashlight);
+			if (_playerIsStunned) _StunCircle.transform.rotation = Quaternion.Euler(0, -transform.rotation.y, 0);
 		}
 
 		private void HandleStunning()

@@ -15,6 +15,7 @@ namespace Game.UI
 
 		[Title("Local refs")] 
 		[SerializeField] private Transform _ElementsContainer;
+		[SerializeField] private CanvasGroup _CanvasGroup;
 		 
 		private Dictionary<string, ToDo_Entry> _EntriesDisplayed;
 
@@ -26,6 +27,11 @@ namespace Game.UI
 			_CraftingItems.ForEach(arg => arg.OnComplete += Refresh);
 
 			RefreshDisplay();
+		}
+
+		private void Update()
+		{
+			_CanvasGroup.alpha = (Input.GetKey(KeyCode.Q))? 1 : 0;
 		}
 
 		private void Refresh()
