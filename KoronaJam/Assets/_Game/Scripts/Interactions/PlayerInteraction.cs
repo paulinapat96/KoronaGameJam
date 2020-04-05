@@ -90,9 +90,8 @@ public class PlayerInteraction : MonoBehaviour
                         Debug.Log("udało się wsadzić item");
                         holdigPickup.gameObject.transform.SetParent(currenObjectInCollision.transform);
                         holdigPickup.gameObject.SetActive(false);
+                        DropItem(true);
                         holdigPickup = null;
-                        return;
-
                     }
                     else
                     {
@@ -100,7 +99,7 @@ public class PlayerInteraction : MonoBehaviour
                     }    
                 }
 
-                if(holdigPickup) DropItem();
+                if(holdigPickup) DropItem(false);
             }
         }
 
@@ -132,12 +131,12 @@ public class PlayerInteraction : MonoBehaviour
         ShowText(false);
     }
 
-    private void DropItem()
+    private void DropItem(bool isItemDestroing)
     {
         Debug.Log("drop");
         movement.PlayerReleasedItem();
         OnTriggerExit(holdigPickup.Collider);
-        OnTriggerEnter(holdigPickup.Collider);
+        if(!isItemDestroing) OnTriggerEnter(holdigPickup.Collider);
         holdigPickup.transform.SetParent(null);
         holdigPickup = null;
     }
