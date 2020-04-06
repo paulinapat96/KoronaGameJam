@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using TMPro;
 using UnityEngine;
 
 namespace Game.UI
@@ -16,8 +18,13 @@ namespace Game.UI
 		[Title("Local refs")] 
 		[SerializeField] private Transform _ElementsContainer;
 		[SerializeField] private CanvasGroup _CanvasGroup;
-		 
+
+		[SerializeField] private GameObject _EndResultScreen;
+		[SerializeField] private TextMeshProUGUI _EndTime;
+		
 		private Dictionary<string, ToDo_Entry> _EntriesDisplayed;
+
+		private float _beginTime;
 
 		public void Start()
 		{
@@ -25,6 +32,8 @@ namespace Game.UI
 			
 			_CraftingItems = FindObjectsOfType<CraftingItem>();
 			_CraftingItems.ForEach(arg => arg.OnComplete += Refresh);
+
+			_beginTime = Time.time;
 
 			RefreshDisplay();
 		}
@@ -36,7 +45,20 @@ namespace Game.UI
 
 		private void Refresh()
 		{
-			RefreshDisplay();
+			if (_CraftingItems.All(arg => arg.AlreadyCompleted))
+			{
+				ShowGoodJob();
+			}
+			else
+			{
+				RefreshDisplay();
+			}
+		}
+
+		private void ShowGoodJob()
+		{
+			_EndResultScreen.gameObject.SetActive(true);
+			_EndTime.text = (Time.time - _beginTime).ToString("000.00") + "s";
 		}
 
 		private void RefreshDisplay()
