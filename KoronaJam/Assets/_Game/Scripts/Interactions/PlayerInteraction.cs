@@ -64,8 +64,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        // Debug.Log("HoldingItem: " + holdigPickup + " HoldingCraftinItem: " + holdingCraftinItem);
-        // Debug.Log("currObjInCol: " + currenObjectInCollision + " List: " + objectsInCollisionList.Count);
+         Debug.Log("HoldingItem: " + holdingPickup + " HoldingCraftinItem: " + holdingCraftinItem);
+         Debug.Log("currObjInCol: " + currenObjectInCollision + " List: " + objectsInCollisionList.Count);
         if (Input.GetKeyUp(KeyCode.E) && currenObjectInCollision)
         {
 
@@ -84,7 +84,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     currenObjectInCollision.GetComponent<CraftingItem>().BuildingFinished();
                     movement.EnableMovement();
-                    OnTriggerExit(currenObjectInCollision.GetComponent<Collider>());
+                  //  OnTriggerExit(currenObjectInCollision.GetComponent<Collider>());
                    // ShowText(false);
                 //  Debug.Log("stop budowy");
 

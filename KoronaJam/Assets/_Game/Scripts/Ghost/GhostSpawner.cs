@@ -68,7 +68,7 @@ namespace Gameplay
 
 		private void SpawnGhostAtPosition(Vector3 randomPosition)
 		{
-			var ghost = Instantiate(_GhostPrefab, randomPosition, Quaternion.identity, transform);
+			var ghost = Instantiate(_GhostPrefab, randomPosition, Quaternion.identity, null);
 			// ghost.transform.localPosition = Vector3.zero;
 
 			ghost.SetTarget(_Player);
