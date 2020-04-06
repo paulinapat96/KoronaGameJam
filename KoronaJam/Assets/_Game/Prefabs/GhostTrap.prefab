@@ -60,7 +60,5 @@ MonoBehaviour:
   _myCollider: {fileID: 5912952931674679417}
   _GhostPrefab: {fileID: 1428436821196015474, guid: f2081138bad3b5446b30e0ae68bd6eb1,
     type: 3}
-  _EnemiesToSpawn:
-  - {fileID: 0}
-  - {fileID: 0}
+  _EnemiesToSpawn: []
   _PersistAfterStepOnto: 1

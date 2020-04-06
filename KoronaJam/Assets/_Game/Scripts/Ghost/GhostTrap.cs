@@ -21,7 +21,7 @@ public class GhostTrap : MonoBehaviour
 		{
 			_EnemiesToSpawn?.ForEach(arg =>
 			{
-				var ghost = Instantiate(_GhostPrefab, transform.position, Quaternion.identity, transform);
+				var ghost = Instantiate(_GhostPrefab, arg.position, Quaternion.identity, transform);
 				ghost.SetTarget(other.GetComponent<PlayerInteractionController>());
 			});
 
