@@ -109,7 +109,7 @@ MonoBehaviour:
   _DistanceToTakeDmg: 8
   _HP: 1
   _TakenDmgPerSec: 2
-  _Speed: 2
+  _Speed: 1.5
   _Speed_WhenPlayerLooks: 0.1
   _DistToAttack: 2
   _AttackFrequency: 3
