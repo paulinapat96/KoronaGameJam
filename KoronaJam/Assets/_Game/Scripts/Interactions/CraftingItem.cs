@@ -231,6 +231,12 @@ public class CraftingItem : MonoBehaviour
 
         _alreadyCompleted = true;
         
+        var collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+        }
+        
         Invoke(nameof(WaitToSpawnGhosts), _DelayToSpawnGhosts);
         Invoke(nameof(WaitToShowComplete), _DelayToUnlockNextLevel);
         
