@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Gameplay;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 
 public class RequiredItemsDisplayer : MonoBehaviour
 {
     [Title("Global refs")]
     [SerializeField] private RequiredItem _RequiredItemsPrefab;
+    [SerializeField] private Transform _PressToStartPrefab;
 
     [Title("Local refs")] 
     [SerializeField] private Transform _ItemsContainer;
@@ -53,15 +55,23 @@ public class RequiredItemsDisplayer : MonoBehaviour
     public void SetData(List<Pickup> pickups)
     {
         _items = new Dictionary<Pickup, RequiredItem>();
-        
-        pickups.ForEach(arg =>
-        {
-            var ob = Instantiate(_RequiredItemsPrefab, Vector3.zero, Quaternion.identity, _ItemsContainer);
-            ob.transform.localPosition = Vector3.zero;
-            ob.SetSprite(arg.IconDisabled, false);
 
-            _items.Add(arg, ob);
-        });
+        if (pickups.IsNullOrEmpty())
+        {
+            var ob = Instantiate(_PressToStartPrefab, Vector3.zero, Quaternion.identity, _ItemsContainer);
+            ob.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            pickups.ForEach(arg =>
+            {
+                var ob = Instantiate(_RequiredItemsPrefab, Vector3.zero, Quaternion.identity, _ItemsContainer);
+                ob.transform.localPosition = Vector3.zero;
+                ob.SetSprite(arg.IconDisabled, false);
+
+                _items.Add(arg, ob);
+            });
+        }
     }
     
     

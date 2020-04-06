@@ -158,12 +158,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4037f2b194e9949b440b34d541472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  _Name: 
   _ItemsDisplayer: {fileID: 4017891247288549864}
   _ProgressSetter: {fileID: 11164986105834223}
-  _RequiredItems: []
-  _AbstractJobResult: {fileID: 0}
+  _RequiredItemsToTrigger: []
+  _RequiredPreviousActions: []
+  _AbstractJobResults: []
+  _GhostSpawner: {fileID: 0}
+  _PlacesToSpawnGhosts: []
   _CraftingTime: 0
+  _DelayToSpawnGhosts: 0
+  _DelayToUnlockNextLevel: 0
 --- !u!65 &7685307833494665584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -411,7 +416,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _RequiredItemsPrefab: {fileID: 228504720652915626, guid: 0c4fe3075b20b9448bcade807fd78583,
     type: 3}
+  _PressToStartPrefab: {fileID: 3006000648449239757, guid: e77fd706a5b4d9f47b2a556999547132,
+    type: 3}
   _ItemsContainer: {fileID: 6995780941213449880}
+  _DistFromBeginShowing: 5
+  _DistFromFullAlpha: 3
 --- !u!1 &4689758004426391509
 GameObject:
   m_ObjectHideFlags: 0
