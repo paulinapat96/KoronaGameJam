@@ -33,14 +33,20 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (other.CompareTag("Pickup"))
         {   
+            Debug.Log("Added object: " + other.gameObject);
+
             objectsInCollisionList.Add(other.gameObject);
             currenObjectInCollision = getNearestCollidesObject();
             if(!holdingPickup) ShowText(true);
         }
         else if (other.CompareTag("CraftingItem"))
         {
-            objectsInCollisionList.Add(other.gameObject);
             var craftingItem = other.GetComponent<CraftingItem>();
+
+            if (craftingItem.AlreadyCompleted) return;
+            
+            objectsInCollisionList.Add(other.gameObject);
+            Debug.Log("Added object: " + other.gameObject);
             currenObjectInCollision = other.gameObject;
             
             if ((craftingItem.IsUnlocked && craftingItem.AreRequirementsFullfilled()) || (holdingPickup && craftingItem.CanPutItem(holdingPickup)))/////////
@@ -56,6 +62,13 @@ public class PlayerInteraction : MonoBehaviour
         {
             pressETextObject.SetActive(false);
             objectsInCollisionList.Remove(other.gameObject);
+            if (objectsInCollisionList.Contains(other.gameObject)) objectsInCollisionList.Remove(other.gameObject);
+            
+            Debug.Log("Removed: " + other.gameObject);
+            string s = "";
+            objectsInCollisionList.ForEach(arg => s += (arg.name) + " | ");
+            Debug.Log("Elements: " + s);
+
             currenObjectInCollision = getNearestCollidesObject();
             if(other.CompareTag("Pickup")) other.GetComponent<Pickup>().ChangeHighlight(false);
         }
@@ -64,16 +77,16 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-         Debug.Log("HoldingItem: " + holdingPickup + " HoldingCraftinItem: " + holdingCraftinItem);
-         Debug.Log("currObjInCol: " + currenObjectInCollision + " List: " + objectsInCollisionList.Count);
+        // Debug.Log("HoldingItem: " + holdigPickup + " HoldingCraftinItem: " + holdingCraftinItem);
+        // Debug.Log("currObjInCol: " + currenObjectInCollision + " List: " + objectsInCollisionList.Count);
         if (Input.GetKeyUp(KeyCode.E) && currenObjectInCollision)
         {
+            var craftingItem = currenObjectInCollision.GetComponent<CraftingItem>();
 
 
             //currenObjectInCollision = getNearestCollidesObject();
             if (!holdingPickup)
             {
-                
                 if (currenObjectInCollision.tag == "Pickup")
                 {
                     holdingPickup = currenObjectInCollision.GetComponent<Pickup>();
@@ -82,21 +95,33 @@ public class PlayerInteraction : MonoBehaviour
 
                 if (currenObjectInCollision.tag == "CraftingItem" && isButtonPressedDown)
                 {
-                    currenObjectInCollision.GetComponent<CraftingItem>().BuildingFinished();
+                    craftingItem.BuildingFinished();
                     movement.EnableMovement();
-                  //  OnTriggerExit(currenObjectInCollision.GetComponent<Collider>());
-                   // ShowText(false);
-                //  Debug.Log("stop budowy");
-
+                    OnTriggerExit(currenObjectInCollision.GetComponent<Collider>());
+                    currenObjectInCollision = null;
+                   ShowText(false);
+                Debug.Log("stop budowy");
+                
                 }
             }
-            else
+            else // is Holding item
             {
                 if(currenObjectInCollision.tag == "CraftingItem")
                 {
-                    if(currenObjectInCollision.GetComponent<CraftingItem>().PutItem(holdingPickup))
+                    if(craftingItem.PutItem(holdingPickup))
                     {
                         Debug.Log("udało się wsadzić item");
+                        
+                        if (craftingItem.AlreadyCompleted)
+                        {
+                            if (objectsInCollisionList.Contains(craftingItem.gameObject))
+                            {
+                                Debug.Log("Removing: " + craftingItem.gameObject);
+                                objectsInCollisionList.Remove(craftingItem.gameObject);
+                            }
+                        }
+
+                        
                         SoundManager.PlaySound(correctSound);
                         holdingPickup.gameObject.transform.SetParent(currenObjectInCollision.transform);
                         holdingPickup.gameObject.SetActive(false);
@@ -122,14 +147,22 @@ public class PlayerInteraction : MonoBehaviour
                 if (item.AreRequirementsFullfilled())
                 {
                     item.BuildingStarted();
-                    movement.DisableMovement();
-                    isButtonPressedDown = true;
-                  //  Debug.Log("start budowy");
+                    if (objectsInCollisionList.Contains(item.gameObject))
+                    {
+                        Debug.Log("Removing: " + item.gameObject);
+                        objectsInCollisionList.Remove(item.gameObject);
+                    }
+                    // movement.DisableMovement();
+                    isButtonPressedDown = false;
+                    currenObjectInCollision = null;
+                    ShowText(false);
+                    //  Debug.Log("start budowy");
                 }
 
             }
-
         }
+        
+        if (!currenObjectInCollision) ShowText(false);
         if(isCanvasActive) playerCanvas.transform.rotation = Quaternion.Euler(0, -transform.rotation.y, 0);
     }
 
