@@ -21,6 +21,9 @@ namespace Game.UI
 
 		[SerializeField] private GameObject _EndResultScreen;
 		[SerializeField] private TextMeshProUGUI _EndTime;
+
+		[SerializeField] private Animator _TaskAnimator;
+		[SerializeField] private TextMeshProUGUI _TaskName;
 		
 		private Dictionary<string, ToDo_Entry> _EntriesDisplayed;
 
@@ -35,7 +38,7 @@ namespace Game.UI
 
 			_beginTime = Time.time;
 
-			RefreshDisplay();
+			RefreshDisplay(false);
 		}
 
 		private void Update()
@@ -51,7 +54,7 @@ namespace Game.UI
 			}
 			else
 			{
-				RefreshDisplay();
+				RefreshDisplay(true);
 			}
 		}
 
@@ -61,7 +64,7 @@ namespace Game.UI
 			_EndTime.text = (Time.time - _beginTime).ToString("000.00") + "s";
 		}
 
-		private void RefreshDisplay()
+		private void RefreshDisplay(bool shallNotice)
 		{
 			_CraftingItems.ForEach(arg =>
 			{
@@ -71,6 +74,9 @@ namespace Game.UI
 				{
 					_EntriesDisplayed[arg.Name].SetData(arg.Name,
 						arg.AlreadyCompleted ? ToDo_Entry.EntryType.Completed : ToDo_Entry.EntryType.ToDo);
+					
+					_TaskAnimator.SetTrigger("completed");
+					_TaskName.text = arg.Name;
 				}
 				else
 				{
