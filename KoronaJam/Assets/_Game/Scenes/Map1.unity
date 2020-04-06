@@ -6605,6 +6605,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 527552837560548843, guid: b88e352bdc015ea48b8c9a2a6dc28c56,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 4013048282095499719, guid: b88e352bdc015ea48b8c9a2a6dc28c56,
         type: 3}
       propertyPath: _RequiredItemsToTrigger.Array.size
