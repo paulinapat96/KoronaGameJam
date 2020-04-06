@@ -51,7 +51,7 @@ namespace Gameplay
 			}
 			else
 			{
-				if (Input.GetMouseButton(1))
+				if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
 				{
 					_isUsingFlashlight = true;
 				}
