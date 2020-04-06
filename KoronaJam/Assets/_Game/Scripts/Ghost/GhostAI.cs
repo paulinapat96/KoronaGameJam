@@ -91,6 +91,7 @@ namespace _Game.Scripts
 			_currentSpeed = _Speed;
 
 			FollowOrAttackPlayer();
+			transform.LookAt(_target.gameObject.transform);
 
 		}
 
