@@ -31,6 +31,12 @@ namespace _Game.Scripts
 
 		[SerializeField] private PlayerInteractionController _target;
 
+		[SerializeField] private Color _FullHP_Color = new Color(0.77f, 0, 1, .5f);
+		[SerializeField] private Color _ZeroHP_Color = new Color(0.77f, 0, 0, 1);
+
+		[SerializeField] private GameObject _AttackParticle;
+		[SerializeField] private GameObject _DeathParticle;
+
 		private float _myHP;
 		private float _currentSpeed;
 
@@ -57,10 +63,13 @@ namespace _Game.Scripts
 			var render = GetComponentInChildren<MeshRenderer>();
 			_myMaterial = render.material;
 			
-			_myMaterial.EnableKeyword("_EMISSION");
+			// _myMaterial.EnableKeyword("_EMISSION");
+			//
+			// _myMaterial.SetFloat("_EmissionMap", 1);
+			// _myMaterial.SetColor("_EmissionColor", Color.red * 0f);
 
-			_myMaterial.SetFloat("_EmissionMap", 1);
-			_myMaterial.SetColor("_EmissionColor", Color.red * 0f);
+			_myMaterial.SetColor("_Color", _FullHP_Color);
+
 		}
 
 		public void Evt_GhostActive()
@@ -77,7 +86,8 @@ namespace _Game.Scripts
 				_myHP -= _TakenDmgPerSec * Time.deltaTime;
 				_currentSpeed = _Speed_WhenPlayerLooks;
 
-				_myMaterial.SetColor("_EmissionColor", Color.red * (1 - (_myHP / _HP)));
+				var hpProgress = /*1 -*/ (_myHP / _HP);
+				_myMaterial.SetColor("_Color", Color.Lerp(_ZeroHP_Color, _FullHP_Color, hpProgress));
 				
 				if (_myHP < 0)
 				{
@@ -97,6 +107,8 @@ namespace _Game.Scripts
 
 		private void KillGhost()
 		{
+			Instantiate(_DeathParticle, transform.position, Quaternion.identity);
+				
 			Destroy(gameObject);
 		}
 
@@ -130,7 +142,7 @@ namespace _Game.Scripts
 			if (_lastAttackTime + _AttackFrequency < Time.time)
 			{
 				Debug.Log("Stun!");
-				_target.PlayerHasBeenStunned(transform);
+				_target.PlayerHasBeenStunned(transform, _AttackParticle);
 				
 				_lastAttackTime = Time.time;
 			}
