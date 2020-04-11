@@ -62,6 +62,7 @@ namespace Game.UI
 		{
 			_EndResultScreen.gameObject.SetActive(true);
 			_EndTime.text = (Time.time - _beginTime).ToString("000.00") + "s";
+			Time.timeScale = 0.001f;
 		}
 
 		private void RefreshDisplay(bool shallNotice)

@@ -4799,7 +4799,7 @@ PrefabInstance:
     - target: {fileID: 3656183757367337183, guid: d909bad7ebc8b5d45880cfd3e4f29819,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.87
+      value: 6.18
       objectReference: {fileID: 0}
     - target: {fileID: 3656183757367337183, guid: d909bad7ebc8b5d45880cfd3e4f29819,
         type: 3}
@@ -4809,7 +4809,7 @@ PrefabInstance:
     - target: {fileID: 3656183757367337183, guid: d909bad7ebc8b5d45880cfd3e4f29819,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.75
+      value: 0.41
       objectReference: {fileID: 0}
     - target: {fileID: 3656183757367337183, guid: d909bad7ebc8b5d45880cfd3e4f29819,
         type: 3}
@@ -4921,6 +4921,16 @@ PrefabInstance:
       propertyPath: _GhostSpawner
       value: 
       objectReference: {fileID: 1517553018}
+    - target: {fileID: 6601471766675932863, guid: d909bad7ebc8b5d45880cfd3e4f29819,
+        type: 3}
+      propertyPath: _DelayToUnlockNextLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7685307833494665584, guid: d909bad7ebc8b5d45880cfd3e4f29819,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2.37
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d909bad7ebc8b5d45880cfd3e4f29819, type: 3}
 --- !u!114 &1841587295 stripped
@@ -5428,6 +5438,11 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 527492983665051883, guid: 1dd44a7d112b7d24393cf3b67c2fdc71,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 575719957496000014, guid: 1dd44a7d112b7d24393cf3b67c2fdc71,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -5472,6 +5487,11 @@ PrefabInstance:
     - target: {fileID: 5808460619949681529, guid: 1dd44a7d112b7d24393cf3b67c2fdc71,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6958423484961211963, guid: 1dd44a7d112b7d24393cf3b67c2fdc71,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7260489101224000023, guid: 1dd44a7d112b7d24393cf3b67c2fdc71,
@@ -6794,6 +6814,11 @@ PrefabInstance:
       propertyPath: _GhostSpawner
       value: 
       objectReference: {fileID: 1517553018}
+    - target: {fileID: 4013048282095499719, guid: b88e352bdc015ea48b8c9a2a6dc28c56,
+        type: 3}
+      propertyPath: _DelayToUnlockNextLevel
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6814309622604144548, guid: b88e352bdc015ea48b8c9a2a6dc28c56,
         type: 3}
       propertyPath: m_Name
@@ -8188,6 +8213,11 @@ PrefabInstance:
       propertyPath: _GhostSpawner
       value: 
       objectReference: {fileID: 1517553018}
+    - target: {fileID: 2264395959885067055, guid: 3eef20e93f1467945a51761bcba721cc,
+        type: 3}
+      propertyPath: _DelayToUnlockNextLevel
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3316084978507851658, guid: 3eef20e93f1467945a51761bcba721cc,
         type: 3}
       propertyPath: m_RootOrder
