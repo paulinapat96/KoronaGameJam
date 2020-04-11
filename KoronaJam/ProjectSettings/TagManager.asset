@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - CraftingItem
   - Pickup
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - 
   - Celling
   - Player
-  - 
+  - PostPro1
   - 
   - 
   - 

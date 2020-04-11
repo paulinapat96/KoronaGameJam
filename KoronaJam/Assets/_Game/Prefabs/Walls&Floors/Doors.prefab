@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5be0559b849505f4993d400473d29322, type: 2}
+  - {fileID: 2100000, guid: 5f81f0da2425c9746a52aa5886f35a1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -169,6 +169,7 @@ GameObject:
   - component: {fileID: 6952682062062242733}
   - component: {fileID: 4623682656841153591}
   - component: {fileID: 2893369458345561794}
+  - component: {fileID: 4511178886093358693}
   m_Layer: 0
   m_Name: Doors
   m_TagString: Untagged
@@ -218,3 +219,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10967827, y: 2.4372237, z: 0.5645199}
   m_Center: {x: 19.802647, y: 1.1947697, z: -9.587636}
+--- !u!65 &4511178886093358693
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6208135839099500990}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.888092, y: 0.10124028, z: 0.744462}
+  m_Center: {x: 18.854904, y: 0.04449314, z: -9.589315}

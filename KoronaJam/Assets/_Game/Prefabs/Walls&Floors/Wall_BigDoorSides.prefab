@@ -168,6 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6895089934277304245}
   - component: {fileID: 6145056859811052164}
+  - component: {fileID: 5765641912665105307}
   m_Layer: 0
   m_Name: Wall_BigDoorSides
   m_TagString: Untagged
@@ -202,5 +203,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.40818024, y: 2.4818425, z: 1}
-  m_Center: {x: 29.95903, y: 1.2019384, z: 0}
+  m_Size: {x: 0.40818024, y: 2.4818425, z: 0.68068886}
+  m_Center: {x: 29.95903, y: 1.2019384, z: -14.902534}
+--- !u!65 &5765641912665105307
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632227097463664038}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.769474, y: 0.055086732, z: 0.7043953}
+  m_Center: {x: 28.970793, y: 0.017569125, z: -14.895559}
